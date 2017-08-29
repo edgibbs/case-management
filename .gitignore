@@ -16,10 +16,12 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
-
+/description
+/HEAD
 /node_modules
 /yarn-error.log
 
 .byebug_history
+“Gemfile.lock”
 “Gemfile.lock”
 “Gemfile.lock”
