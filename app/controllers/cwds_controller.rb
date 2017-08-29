@@ -1,0 +1,2 @@
+class CwdsController < ApplicationController
+end

@@ -1,0 +1,2 @@
+class CaseManagement < ApplicationRecord
+end

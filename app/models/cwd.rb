@@ -1,0 +1,2 @@
+class Cwd < ApplicationRecord
+end
