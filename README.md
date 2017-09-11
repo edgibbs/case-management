@@ -1,6 +1,6 @@
 # Case Management
 
-[Badges TBD]
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [Badges TBD]
 
 The Case Management frontend application for Child Welfare Digital Services.
 
