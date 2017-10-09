@@ -7,8 +7,4 @@
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
 
-(function(){
-  const el = document.createElement('div');
-  el.appendChild(document.createTextNode('Hello from JavaScript'));
-  document.body.appendChild(el);
-})();
+import '../hello';
