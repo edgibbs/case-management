@@ -7,3 +7,9 @@ The Case Management frontend application for Child Welfare Digital Services.
 ## Getting Started
 
 Please see our [Wiki](https://github.com/ca-cwds/case-management/wiki) for the latest documentation.
+
+Start development server:
+
+```sh
+foreman start -f Procfile.dev
+```
