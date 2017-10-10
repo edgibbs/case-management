@@ -26,3 +26,8 @@
 /node_modules
 
 package-lock.json
+
+# Editor cruft
+*.sublime-workspace
+*.sublime-project
+/.vscode
