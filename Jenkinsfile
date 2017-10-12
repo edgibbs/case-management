@@ -36,7 +36,7 @@ def notifyBuild(String buildStatus, Exception e) {
 
 node('cm-slave') {
     def app
-    try { 
+    try {
     stage('Clone repository') {
         /* Let's make sure we have the repository cloned to our workspace */
 
@@ -47,16 +47,22 @@ node('cm-slave') {
         /* This builds the actual image; synonymous to
          * docker build on the command line */
 
-         app = docker.build("cwds/casemanagement") 
+         app = docker.build("cwds/casemanagement")
     }
-    
+
+    stage('Lint') {
+      app.inside {
+        sh 'yarn run lint:configtest && lint'
+      }
+    }
+
     stage('Smoke test') {
         /* We test our image with a simple smoke test:
          * Run a curl inside the newly-build Docker image */
 
          app.inside {
             sh 'bundle exec rspec'
-        } 
+        }
     }
 
     stage('Push image') {
@@ -64,7 +70,7 @@ node('cm-slave') {
          * First, the incremental build number from Jenkins
          * Second, the 'latest' tag.
          * Pushing multiple tags is cheap, as all the layers are reused. */
-       
+
         withDockerRegistry([credentialsId: '6ba8d05c-ca13-4818-8329-15d41a089ec0']) {
             app.push('latest')
         }
@@ -82,10 +88,10 @@ node('cm-slave') {
        errorcode = e
        currentBuild.result = "FAIL"
        notifyBuild(currentBuild.result,errorcode)
-       throw e; 
+       throw e;
     }finally {
        cleanWs()
- } 
+ }
 }
 
 

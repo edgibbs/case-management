@@ -6,4 +6,3 @@ render(
   <Hello name="World" />,
   document.body.appendChild(document.createElement('div'))
 );
-
