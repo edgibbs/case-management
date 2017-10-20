@@ -52,7 +52,7 @@ node('cm-slave') {
 
     stage('Lint') {
       app.inside {
-        sh 'yarn run lint:configtest && lint'
+        sh 'yarn run lint'
       }
     }
 
