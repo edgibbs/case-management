@@ -1,98 +1,60 @@
-def notifyBuild(String buildStatus, Exception e) {
-  buildStatus =  buildStatus ?: 'SUCCESSFUL'
+DOCKER_GROUP = 'cwds'
+DOCKER_IMAGE = 'casemanagement'
+DOCKER_REGISTRY_CREDENTIALS_ID = '6ba8d05c-ca13-4818-8329-15d41a089ec0'
+SLACK_CHANNEL = '#casemanagement-stream'
+SLACK_CREDENTIALS_ID = 'slackmessagetpt2'
+DOCKER_NAME = 'cm-latest'
 
-  // Default values
-  def colorName = 'RED'
-  def colorCode = '#FF0000'
-  def subject = "${buildStatus}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
-  def summary = """*${buildStatus}*: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':\nMore detail in console output at <${env.BUILD_URL}|${env.BUILD_URL}>"""
-  def details = """${buildStatus}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':\n
-    Check console output at ${env.BUILD_URL} """
-  // Override default values based on build status
-  if (buildStatus == 'STARTED') {
-    color = 'YELLOW'
-    colorCode = '#FFFF00'
-  } else if (buildStatus == 'SUCCESSFUL') {
-    color = 'GREEN'
-    colorCode = '#00FF00'
-  } else {
-    color = 'RED'
-    colorCode = '#FF0000'
-    details +="<p>Error message ${e.message}, stacktrace: ${e}</p>"
-    summary +="\nError message ${e.message}, stacktrace: ${e}"
-  }
-
-  // Send notifications
-
-  slackSend channel: "#casemanagement-stream", baseUrl: 'https://hooks.slack.com/services/', tokenCredentialId: 'slackmessagetpt2', color: colorCode, message: summary
-  emailext(
-      subject: subject,
-      body: details,
-      attachLog: true,
-      recipientProviders: [[$class: 'DevelopersRecipientProvider']],
-      to: "ramu.kammagani@osi.ca.gov"
+def notify(String status) {
+    status = status ?: 'SUCCESS'
+    def colorCode = status == 'SUCCESS' ? '#00FF00' : '#FF0000'
+    def summary = """*${status}*: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':\nMore detail in console output at <${env.BUILD_URL}|${env.BUILD_URL}>"""
+    slackSend(
+        channel: SLACK_CHANNEL,
+        baseUrl: 'https://hooks.slack.com/services/',
+        tokenCredentialId: SLACK_CREDENTIALS_ID,
+        color: colorCode,
+        message: summary
     )
 }
 
 node('cm-slave') {
     def app
     try {
-    stage('Clone repository') {
-        /* Let's make sure we have the repository cloned to our workspace */
-
-        checkout scm
-    }
-
-    stage('Build image') {
-        /* This builds the actual image; synonymous to
-         * docker build on the command line */
-
-         app = docker.build("cwds/casemanagement")
-    }
-
-    stage('Lint') {
-      app.inside {
-        sh 'yarn run lint'
-      }
-    }
-
-    stage('Smoke test') {
-        /* We test our image with a simple smoke test:
-         * Run a curl inside the newly-build Docker image */
-
-         app.inside {
-            sh 'bundle exec rspec'
+        stage('Checkout') {
+            checkout scm
         }
-    }
-
-    stage('Push image') {
-        /* Finally, we'll push the image with two tags:
-         * First, the incremental build number from Jenkins
-         * Second, the 'latest' tag.
-         * Pushing multiple tags is cheap, as all the layers are reused. */
-
-        withDockerRegistry([credentialsId: '6ba8d05c-ca13-4818-8329-15d41a089ec0']) {
-            app.push('latest')
+        stage('Build Docker Image') {
+            app = docker.build("${DOCKER_GROUP}/${DOCKER_IMAGE}:${env.BUILD_ID}")
         }
-    }
-    stage('Run application') {
-
-        sh 'docker stop casemanagement-test || exit 0; docker rm casemanagement-test || exit 0'
-        withDockerRegistry([credentialsId: '6ba8d05c-ca13-4818-8329-15d41a089ec0']) {
-          sh 'docker pull cwds/casemanagement '
-          sh 'docker run -d -p 8888:3000 --name casemanagement-test -e APP_NAME=casemanagement cwds/casemanagement'
+        app.withRun("-e CI=true") { container ->
+            stage('Lint') {
+                sh "docker exec -t ${container.id} yarn lint"
+            }
+            stage('Unit Test') {
+                sh "docker exec -t ${container.id} bundle exec rspec"
+                sh "docker exec -t ${container.id} yarn run test"
+            }
         }
+        stage('Publish Image') {
+            withDockerRegistry([credentialsId: DOCKER_REGISTRY_CREDENTIALS_ID]) {
+                app.push()
+                app.push('latest')
+            }
+        }
+        stage('Deploy') {
+            sh "docker ps --all --quiet --filter \"name=cm-latest\" | xargs docker stop"
+            sh "docker ps --all --quiet --filter \"name=cm-latest\" | xargs docker rm"
+            withDockerRegistry([credentialsId: DOCKER_REGISTRY_CREDENTIALS_ID]) {
+                sh "docker pull ${DOCKER_GROUP}/${DOCKER_IMAGE}"
+                sh "docker run -d -p 80:3000 --name ${DOCKER_NAME} -e APP_NAME=casemanagement ${DOCKER_GROUP}/${DOCKER_IMAGE}"
+            }
+        }
+    } catch(Exception e) {
+       currentBuild.result = "FAILURE"
+       throw e
+    } finally {
+        notify(currentBuild.result)
+        cleanWs()
     }
-
-    } catch (Exception e)    {
-       errorcode = e
-       currentBuild.result = "FAIL"
-       notifyBuild(currentBuild.result,errorcode)
-       throw e;
-    }finally {
-       cleanWs()
- }
 }
-
-
-
