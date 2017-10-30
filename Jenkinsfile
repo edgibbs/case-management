@@ -1,9 +1,9 @@
 DOCKER_GROUP = 'cwds'
 DOCKER_IMAGE = 'casemanagement'
 DOCKER_REGISTRY_CREDENTIALS_ID = '6ba8d05c-ca13-4818-8329-15d41a089ec0'
+DOCKER_CONTAINER_NAME = 'cm-latest'
 SLACK_CHANNEL = '#casemanagement-stream'
 SLACK_CREDENTIALS_ID = 'slackmessagetpt2'
-DOCKER_NAME = 'cm-latest'
 
 def notify(String status) {
     status = status ?: 'SUCCESS'
@@ -47,8 +47,11 @@ node('cm-slave') {
             sh "docker ps --all --quiet --filter \"name=cm-latest\" | xargs docker rm"
             withDockerRegistry([credentialsId: DOCKER_REGISTRY_CREDENTIALS_ID]) {
                 sh "docker pull ${DOCKER_GROUP}/${DOCKER_IMAGE}"
-                sh "docker run -d -p 80:3000 --name ${DOCKER_NAME} -e APP_NAME=casemanagement ${DOCKER_GROUP}/${DOCKER_IMAGE}"
+                sh "docker run --detach --publish 80:3000 --name ${DOCKER_CONTAINER_NAME} -e APP_NAME=casemanagement ${DOCKER_GROUP}/${DOCKER_IMAGE}"
             }
+        }
+        stage('Clean Up') {
+            sh "docker images ${DOCKER_GROUP}/${DOCKER_IMAGE} --filter \"before=${DOCKER_GROUP}/${DOCKER_IMAGE}:${env.BUILD_ID}\" -q | xargs docker rmi || true"
         }
     } catch(Exception e) {
        currentBuild.result = "FAILURE"
