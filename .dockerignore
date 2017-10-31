@@ -22,8 +22,6 @@ docker-compose.yml
 /public/packs
 /public/packs-test
 
-/node_modules
-
 package-lock.json
 
 *.sublime-workspace
