@@ -27,7 +27,7 @@ node('cm-slave') {
         stage('Build Docker Image') {
             app = docker.build("${DOCKER_GROUP}/${DOCKER_IMAGE}:${env.BUILD_ID}")
         }
-        app.withRun("-e CI=true") { container ->
+        app.withRun("--env CI=true") { container ->
             stage('Lint') {
                 sh "docker exec -t ${container.id} yarn lint"
             }
@@ -47,7 +47,7 @@ node('cm-slave') {
             sh "docker ps --all --quiet --filter \"name=cm-latest\" | xargs docker rm"
             withDockerRegistry([credentialsId: DOCKER_REGISTRY_CREDENTIALS_ID]) {
                 sh "docker pull ${DOCKER_GROUP}/${DOCKER_IMAGE}"
-                sh "docker run --detach --publish 80:3000 --name ${DOCKER_CONTAINER_NAME} -e APP_NAME=casemanagement ${DOCKER_GROUP}/${DOCKER_IMAGE}"
+                sh "docker run --detach --publish 80:3000 --name ${DOCKER_CONTAINER_NAME} --env APP_NAME=casemanagement --env RAILS_ENV=test ${DOCKER_GROUP}/${DOCKER_IMAGE}"
             }
         }
         stage('Clean Up') {
