@@ -1,2 +1,2 @@
-rails: bundle exec rails server -b 0.0.0.0
-webpack: yarn start -- --listen-host 0.0.0.0 --host localhost
+rails: bundle exec rails server -b 0.0.0.0 -p 3000
+webpack: bundle exec bin/webpack-dev-server

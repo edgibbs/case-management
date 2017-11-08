@@ -11,7 +11,7 @@
     "license-dump": "license-checker --csv",
     "clean": "rimraf public/packs*",
     "build:webpacker": "./bin/webpack",
-    "start": "./bin/webpack-dev-server",
+    "start": "scripts/start.sh",
     "build": "npm-run-all --serial clean lint:configtest lint:test test build:webpacker"
   },
   "dependencies": {
