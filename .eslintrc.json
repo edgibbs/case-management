@@ -5,14 +5,16 @@
       "plugin:jsx-a11y/recommended",
       "prettier",
       "prettier/react",
-      "prettier/standard"
+      "prettier/standard",
+      "plugin:no-unsanitized/DOM"
     ],
     "plugins": [
       "react",
       "jsx-a11y",
       "jest",
       "prettier",
-      "standard"
+      "standard",
+      "no-unsanitized"
     ],
     "parserOptions": {
       "sourceType": "module",
