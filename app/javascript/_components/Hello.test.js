@@ -1,14 +1,10 @@
+import React from 'react';
 import Hello from './Hello';
-
-describe('The answer to life, the universe, and everything', () => {
-  it('should be 42', () => {
-    const answer = 42;
-    expect(answer).toBe(42);
-  });
-});
+import { shallow } from 'enzyme';
 
 describe('Hello', () => {
-  it('should be defined', () => {
-    expect(Hello).toBeDefined();
+  it('displays a name', () => {
+    const hello = shallow(<Hello name="world" />);
+    expect(hello.text()).toEqual('Hello world!');
   });
 });
