@@ -14,5 +14,6 @@ ADD yarn.lock /app/yarn.lock
 RUN bundle install --jobs 20 --retry 5 && \
     yarn install --non-interactive --frozen-lockfile
 ADD . /app
+RUN gem install foreman
 EXPOSE 3000 3035
 CMD ["bundle", "exec", "rails", "server"]
