@@ -30,6 +30,7 @@ node('cm-slave') {
         app.withRun("--env CI=true") { container ->
             stage('Lint') {
                 sh "docker exec -t ${container.id} yarn lint"
+                sh "docker exec -t ${container.id} bundle exec rubocop"
             }
             stage('Unit Test') {
                 sh "docker exec -t ${container.id} bundle exec rspec"
