@@ -20,7 +20,8 @@
     "enzyme-adapter-react-16": "^1.0.4",
     "prop-types": "^15.6.0",
     "react": "^16.0.0",
-    "react-dom": "^16.0.0"
+    "react-dom": "^16.0.0",
+    "sass-loader": "^6.0.6"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -47,6 +48,7 @@
     "license-checker": "^15.0.0",
     "npm-run-all": "^4.1.1",
     "prettier": "^1.7.4",
+    "react-wood-duck": "^0.1.35",
     "webpack": "^3.0.0",
     "webpack-dev-server": "^2.9.3"
   }

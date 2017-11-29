@@ -20,3 +20,5 @@ Metrics/BlockLength:
 Metrics/MethodLength:
   Exclude:
     - 'spec/**/*.rb'
+Style/FrozenStringLiteralComment:
+  Enabled: false

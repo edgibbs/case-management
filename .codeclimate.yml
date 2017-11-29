@@ -6,13 +6,14 @@ engines:
   csslint:
     enabled: true
   duplication:
-    enabled: true
+    exclude_patterns:
+      - "app/javascript/clientIdPage/ClientIdPage.test.js"
     config:
       languages:
       - ruby
       - javascript
   eslint:
-    enabled: true
+    enabled: true 
     channel: "eslint-4"
     config:
       config: './.eslintrc-codeclimate.js'

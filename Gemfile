@@ -37,6 +37,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 #
 group :test do
+  gem 'rails-controller-testing'
   gem 'rspec'
 end
 
