@@ -8,12 +8,13 @@ engines:
   duplication:
     exclude_patterns:
       - "app/javascript/clientIdPage/ClientIdPage.test.js"
+      - "spec"
     config:
       languages:
       - ruby
       - javascript
   eslint:
-    enabled: true 
+    enabled: true
     channel: "eslint-4"
     config:
       config: './.eslintrc-codeclimate.js'

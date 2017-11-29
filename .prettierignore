@@ -1,3 +1,4 @@
 package.json
 /public/packs
 /public/packs-test
+app/javascript/coverage

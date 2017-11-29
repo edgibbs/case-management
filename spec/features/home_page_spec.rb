@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 feature 'index page' do
-  scenario 'displays default rails' do
+  scenario 'displays cm landing page' do
     visit '/'
     expect(page.title).to eq 'CaseManagement'
   end

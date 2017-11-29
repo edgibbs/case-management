@@ -13,3 +13,5 @@
  *= require_tree .
  *= require_self
  */
+@import 'bootstrap/dist/css/bootstrap.css';
+@import 'react-wood-duck/dist/styles/application.css';
