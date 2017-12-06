@@ -48,7 +48,7 @@
     "license-checker": "^15.0.0",
     "npm-run-all": "^4.1.1",
     "prettier": "^1.7.4",
-    "react-wood-duck": "^0.1.35",
+    "react-wood-duck": "^0.1.36",
     "webpack": "^3.0.0",
     "webpack-dev-server": "^2.9.3"
   }

@@ -1,39 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { SideNav, GlobalHeader, Cards, PageHeader } from 'react-wood-duck';
+import {
+  SideBar,
+  NavLinks,
+  NavLink,
+  GlobalHeader,
+  Cards,
+  PageHeader,
+} from 'react-wood-duck';
 
-const sideNavContent = [
-  {
-    type: 'navLinks',
-    navItems: [
-      {
-        type: 'navLink',
-        text: 'Client Information',
-        href: '#',
-        preIcon: 'fa fa-user',
-      },
-      {
-        type: 'navLink',
-        text: 'Safety Alert Information',
-        href: '#',
-        preIcon: 'fa fa-user',
-      },
-      {
-        type: 'navLink',
-        text: 'Other Client Information',
-        href: '#',
-        preIcon: 'fa fa-user',
-      },
-      {
-        type: 'navLink',
-        text: 'Race & Ethinicity',
-        href: '#',
-        preIcon: 'fa fa-user',
-      },
-    ],
-  },
-];
-const sideNavColumnWidth = 3;
+const navLinks = (
+  <NavLinks>
+    <NavLink text="Client Information" href="#ClientInformation" />
+    <NavLink text="Safety Alert Information" href="#SafetyAlertInformation" />
+    <NavLink text="Other Client Information" href="#Other CLient Information" />
+    <NavLink text="Race & Ethinicity" href="#Race & Ethinicity" />
+  </NavLinks>
+);
 export default class ClientIdPage extends React.Component {
   render() {
     return (
@@ -41,9 +24,7 @@ export default class ClientIdPage extends React.Component {
         <GlobalHeader />
         <PageHeader pageTitle="Child Name" />
         <div className="container-fluid noPadding">
-          <SideNav content={sideNavContent} columnWidth={sideNavColumnWidth}>
-            {this.props.children}
-          </SideNav>
+          <SideBar columnWidth={3}>{navLinks}</SideBar>
           <div className="col-md-9 col-md-offset-3 col-xs-12">
             <Cards cardHeaderText="Client Information" />
           </div>
