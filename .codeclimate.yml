@@ -25,6 +25,10 @@ engines:
   rubocop:
     enabled: true
     channel: rubocop-0-48
+  git-legal:
+    enabled: true
+    issue_override:
+      severity: major
 ratings:
   paths:
   - Gemfile.lock
