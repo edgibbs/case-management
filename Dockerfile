@@ -7,13 +7,11 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
     rm -rf /var/lib/apt/lists/*
 RUN mkdir /app
 WORKDIR /app
-ADD Gemfile /app/Gemfile
-ADD Gemfile.lock /app/Gemfile.lock
-ADD package.json /app/package.json
-ADD yarn.lock /app/yarn.lock
-RUN bundle install --jobs 20 --retry 5 && \
-    yarn install --non-interactive --frozen-lockfile
-ADD . /app
 RUN gem install foreman
+ADD Gemfile Gemfile.lock /app/
+RUN bundle install --jobs 20 --retry 5
+ADD package.json yarn.lock /app/
+RUN yarn install --non-interactive --frozen-lockfile
+ADD . /app
 EXPOSE 3000 3035
 CMD ["bundle", "exec", "rails", "server"]
