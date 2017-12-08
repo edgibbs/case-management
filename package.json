@@ -50,6 +50,6 @@
     "prettier": "^1.7.4",
     "react-wood-duck": "^0.1.37",
     "webpack": "^3.0.0",
-    "webpack-dev-server": "^2.9.3"
+    "webpack-dev-server": "^2.9.7"
   }
 }
