@@ -1,0 +1,4 @@
+development:
+  case_api_base_url: 'https://casemgmapi.dev.cwds.io'
+test:
+  case_api_base_url: 'https://casemgmapi.test.cwds.io'

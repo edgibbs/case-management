@@ -1,5 +1,14 @@
 Rails.application.routes.draw do
-  root 'home#index'
+  root 'dashboard#index'
+
   get 'clients/show'
   get 'family_finding/index'
+
+  namespace :api do
+    resources :cases, only: [ :index ] do
+      collection do
+        get ':user_id/index', to: 'cases#cases_by_user'
+      end
+    end
+  end
 end

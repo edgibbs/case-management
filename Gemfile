@@ -7,6 +7,9 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'dry-struct', '~> 0.4.0'
+gem 'dry-types', '~> 0.12.2'
+gem 'faraday', '~> 0.13.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
 # Use sqlite3 as the database for Active Record
@@ -38,6 +41,8 @@ gem 'jbuilder', '~> 2.5'
 group :test do
   gem 'rails-controller-testing'
   gem 'rspec'
+  gem 'rspec-dry-struct'
+  gem 'rspec-rails'
 end
 
 group :development, :test do
@@ -48,7 +53,6 @@ group :development, :test do
   gem 'foreman', '~> 0.84.0'
   gem 'pry'
   gem 'pry-byebug'
-  gem 'rspec-rails'
   gem 'selenium-webdriver'
 end
 

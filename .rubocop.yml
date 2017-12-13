@@ -17,8 +17,9 @@ Metrics/BlockLength:
   Exclude:
     - 'spec/**/*.rb'
 
+Metrics/LineLength:
+  Max: 100
+
 Metrics/MethodLength:
   Exclude:
     - 'spec/**/*.rb'
-Style/FrozenStringLiteralComment:
-  Enabled: false
