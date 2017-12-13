@@ -12,12 +12,12 @@ module Api
     private
 
     def names
-      %w[Alice Bob Carl DAve Earl Frank Gregg Henry Ivan Johnny]
+      %w[Alice Bob Carl Dave Earl Frank Gregg Henry Ivan Johnny]
     end
 
     def create_case(id, name)
       { id: id.to_s, name: name, assignmentType: 'primary',
-        assignmentDate: '2017-12-25', serviceComponent: 'Emergency Placement' }
+        assignmentDate: '2017-12-25', serviceComponent: 'Family Maintenance' }
     end
   end
 end

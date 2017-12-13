@@ -22,7 +22,7 @@ module Api
                                  name: 'Alice',
                                  assignmentType: 'primary',
                                  assignmentDate: '2017-12-25',
-                                 serviceComponent: 'Emergency Placement')
+                                 serviceComponent: 'Family Maintenance')
       end
     end
   end
