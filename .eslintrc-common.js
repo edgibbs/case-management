@@ -15,6 +15,16 @@ module.exports = {
   },
   rules: {
     'prettier/prettier': 'error',
+    'jsx-a11y/label-has-for': [
+      'error',
+      {
+        components: ['label'],
+        required: {
+          some: ['nesting', 'id'],
+        },
+        allowChildren: true,
+      },
+    ],
   },
   parserOptions: {
     sourceType: 'module',

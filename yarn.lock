@@ -4684,8 +4684,8 @@ mkdirp@^0.3.5:
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-0.3.5.tgz#de3e5f8961c88c787ee1368df849ac4413eca8d7"
 
 moment@^2.18.1:
-  version "2.19.2"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.19.2.tgz#8a7f774c95a64550b4c7ebd496683908f9419dbe"
+  version "2.19.4"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.19.4.tgz#17e5e2c6ead8819c8ecfad83a0acccb312e94682"
 
 ms@2.0.0:
   version "2.0.0"
@@ -6058,8 +6058,8 @@ react-autowhatever@^10.1.0:
     section-iterator "^2.0.0"
 
 react-datetime@^2.9.0:
-  version "2.11.0"
-  resolved "https://registry.yarnpkg.com/react-datetime/-/react-datetime-2.11.0.tgz#6560a8e5b81f7e52986083dc2e8cb94bb74528ea"
+  version "2.11.1"
+  resolved "https://registry.yarnpkg.com/react-datetime/-/react-datetime-2.11.1.tgz#11d15081dd7d6729284e21c1b8ea7b975e3bdc7e"
   dependencies:
     create-react-class "^15.5.2"
     object-assign "^3.0.0"
@@ -6107,9 +6107,9 @@ react-themeable@^1.1.0:
   dependencies:
     object-assign "^3.0.0"
 
-react-wood-duck@^0.1.38:
-  version "0.1.38"
-  resolved "https://registry.yarnpkg.com/react-wood-duck/-/react-wood-duck-0.1.38.tgz#2fd7eaa252367dbd75cc38420622303576c028e9"
+react-wood-duck@^0.1.39:
+  version "0.1.39"
+  resolved "https://registry.yarnpkg.com/react-wood-duck/-/react-wood-duck-0.1.39.tgz#a0c24429e6431e648ee63dcc82faa467a961bb04"
   dependencies:
     babel-runtime "^6.6.1"
     bootstrap "^3.3.7"

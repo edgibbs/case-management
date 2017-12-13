@@ -3,14 +3,15 @@ import { shallow } from 'enzyme';
 import ClientIdPage from './ClientIdPage.js';
 import { SideBar } from 'react-wood-duck';
 
-describe('<ClientIdPage />', () => {
+describe('Client ID Page', () => {
   const pageTitle = 'Child Name';
-
   const clientPage = shallow(<ClientIdPage />);
+
   it('renders a GlobalHeader and SideNav, Cards', () => {
     expect(clientPage.find('GlobalHeader').length).toBe(1);
     expect(clientPage.find('PageHeader').length).toBe(1);
-    expect(clientPage.find('Cards').length).toBe(4);
+    expect(clientPage.find('SideBar').length).toBe(1);
+    expect(clientPage.find('Cards').length).toBe(3);
   });
 
   it('Has Class Names ', () => {
