@@ -16,7 +16,7 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
-/app/javascript/coverage
+/coverage
 
 /node_modules
 /yarn-error.log
