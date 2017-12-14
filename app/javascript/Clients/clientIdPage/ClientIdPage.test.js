@@ -54,7 +54,7 @@ describe('Client ID Page', () => {
   });
 
   it('has a <SideBar />', () => {
-    expect(clientPage.find(SideBar).exists());
+    expect(clientPage.find(SideBar).exists()).toBe(true);
   });
 
   it('passes children to <SideBar />', () => {

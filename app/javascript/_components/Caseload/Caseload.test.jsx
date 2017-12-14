@@ -8,6 +8,7 @@ describe('Caseload', () => {
     const Wrapper = shallow(<Caseload />);
     expect(Wrapper.find(Cards).exists()).toBe(true);
   });
+
   describe('#renderRecords()', () => {
     let cases;
     beforeEach(() => {
@@ -28,12 +29,14 @@ describe('Caseload', () => {
         },
       ];
     });
+
     it('should return a table', () => {
       const Wrapper = shallow(<Caseload status="ready" cases={cases} />);
       const children = Wrapper.find('tbody > tr');
       expect(children.length).toBe(cases.length);
     });
   });
+
   describe('#renderEmpty', () => {
     it('should render when empty caseload', () => {
       const testMsg = 'No cases for you!';
@@ -41,14 +44,16 @@ describe('Caseload', () => {
       const Wrapper = shallow(
         <Caseload renderEmpty={emptyFn} status="ready" />
       );
-      expect(emptyFn).toHaveBeenCalled();
+      expect(emptyFn).toHaveBeenCalledWith();
       expect(Wrapper.find(Cards).prop('children')).toEqual(testMsg);
     });
+
     it('should have a default empty message', () => {
       const Wrapper = shallow(<Caseload status="ready" cases={[]} />);
       expect(Wrapper.find(Cards).prop('children')).toEqual('empty!');
     });
   });
+
   describe('#renderWaiting', () => {
     it('should render when waiting', () => {
       const testMsg = 'Hello world';
@@ -56,9 +61,10 @@ describe('Caseload', () => {
       const Wrapper = shallow(
         <Caseload renderWaiting={waitingFn} status="not-ready" />
       );
-      expect(waitingFn).toHaveBeenCalled();
+      expect(waitingFn).toHaveBeenCalledWith();
       expect(Wrapper.find(Cards).prop('children')).toEqual(testMsg);
     });
+
     it('should have a default message', () => {
       const Wrapper = shallow(<Caseload status="not-ready" />);
       expect(Wrapper.find(Cards).prop('children')).toEqual('waiting...');
