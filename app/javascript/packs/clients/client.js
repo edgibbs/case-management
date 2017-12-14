@@ -1,3 +1,1 @@
-import ClientIdPage from 'Clients/clientIdPage';
-
-export default ClientIdPage;
+import '../../Clients/clientIdPage';
