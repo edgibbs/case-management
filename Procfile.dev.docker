@@ -1,2 +1,2 @@
-rails: bundle exec rails server -b 0.0.0.0 -p 3000
-webpack: ./bin/webpack-dev-server --listen-host 0.0.0.0 --host localhost --watch-poll 500 --watch-aggregate-timeout 300
+rails: DOCKER_DEV=TRUE bundle exec rails server -b 0.0.0.0 -p 3000
+webpack: DOCKER_DEV=TRUE ./bin/webpack-dev-server --listen-host 0.0.0.0 --host localhost

@@ -6,4 +6,4 @@ docker run \
   --publish "3000":"3000" \
   --publish "3035":"3035" \
   --mount type=bind,src="$(pwd)"/app,dst=/app/app,consistency=cached \
-  cwds/casemanagement foreman start
+  cwds/casemanagement foreman start -f Procfile.dev.docker

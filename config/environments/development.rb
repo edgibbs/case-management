@@ -48,7 +48,23 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
-  # Use an evented file watcher to asynchronously detect changes in source code,
-  # routes, locales, etc. This feature depends on the listen gem.
-  config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+  if not ENV["DOCKER_DEV"]
+
+    # Use an evented file watcher to asynchronously detect changes in source code,
+    # routes, locales, etc. This feature depends on the listen gem.
+    config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+  else
+
+    # Fallback to a watcher that is independent of file system event systems to
+    # work in docker, vagrant, NFS, etc.
+    puts "Using watcher for docker ActiveSupport"
+    config.file_watcher = ActiveSupport::FileUpdateChecker
+
+    # Silence the web console from complaining about rendering the console
+    # in server logs
+    config.web_console.whiny_requests = false
+
+  end
+
 end

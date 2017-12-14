@@ -45,10 +45,6 @@ development:
     overlay: true
     disable_host_check: true
     use_local_ip: false
-    watch_options:
-      ignored: /node_modules/
-      aggregate_timeout: 300
-      poll: 500
 
 test:
   <<: *default
