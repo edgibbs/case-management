@@ -17,7 +17,24 @@ const names = [
 ];
 
 export default class FamilyFinding extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { selectedOption: 'Anderson, James' };
+    this.handleChangeDropDown = this.handleChangeDropDown.bind(this);
+  }
+  handleChangeDropDown(event) {
+    this.setState({ selectedOption: event.value });
+  }
   render() {
+    const cardProps = {
+      cardHeaderText: 'Card',
+      cardbgcolor: 'transparent',
+      columnLargeWidth: 9,
+      columnMediumWidth: 9,
+      offsetMediumValue: 3,
+      columnXsmallWidth: 9,
+      wrapContainer: '',
+    };
     return (
       <div>
         <GlobalHeader />
@@ -29,15 +46,14 @@ export default class FamilyFinding extends React.Component {
                 name="Find Placement Dropdown"
                 label="Find Placement For:"
                 options={names}
-                onChange={() => {}}
+                onChange={this.handleChangeDropDown}
+                selectedOption={this.state.selectedOption}
               />
               <InputComponent label="Near Zip Code" type="text" />
             </SideBar>
-            <div className="col-lg-9 col-lg-offset-3 ">
-              <Cards cardHeaderText="Card" />
-              <Cards cardHeaderText="Card" />
-              <Cards cardHeaderText="Card" />
-            </div>
+            <Cards {...cardProps} />
+            <Cards {...cardProps} />
+            <Cards {...cardProps} />
           </div>
         </div>
       </div>

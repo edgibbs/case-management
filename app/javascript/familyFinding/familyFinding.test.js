@@ -11,27 +11,31 @@ import {
 } from 'react-wood-duck';
 
 describe('Family Finding Page', () => {
-  it('renders a GlobalHeader, PageHeader, Cards, SideBar', () => {
-    const familyFinding = shallow(<FamilyFinding />);
-    expect(familyFinding.find(GlobalHeader).length).toBe(1);
-    expect(familyFinding.find(PageHeader).length).toBe(1);
-    expect(familyFinding.find(Cards).length).toBeGreaterThan(0);
-    expect(familyFinding.find(SideBar).length).toBe(1);
-    expect(familyFinding.find(DropDownField).length).toBe(1);
-    expect(familyFinding.find(InputComponent).length).toBe(1);
+  it('#renders a GlobalHeader, PageHeader, Cards, SideBar', () => {
+    const Wrapper = shallow(<FamilyFinding />);
+    expect(Wrapper.find(GlobalHeader).length).toBe(1);
+    expect(Wrapper.find(PageHeader).length).toBe(1);
+    expect(Wrapper.find(Cards).length).toBeGreaterThan(0);
+    expect(Wrapper.find(SideBar).length).toBe(1);
   });
 
-  it('should create a <DropDownField />', () => {
-    expect(
-      shallow(<FamilyFinding />)
-        .find(DropDownField)
-        .exists()
-    ).toBe(true);
+  it('#renders <InputComponent />', () => {
+    const Wrapper = shallow(<FamilyFinding />);
+    expect(Wrapper.find(InputComponent).length).toBe(1);
   });
 
-  it('should pass a noop callback to <DropDownField />', () => {
-    const Wrapper = shallow(<FamilyFinding />).find(DropDownField);
-    expect(Wrapper.prop('onChange')).toBeDefined();
-    expect(() => Wrapper.simulate('change')).not.toThrow();
+  describe('<DropDownField />', () => {
+    it('#renders', () => {
+      const Wrapper = shallow(<FamilyFinding />);
+      expect(Wrapper.find(DropDownField).length).toBe(1);
+      expect(Wrapper.find(DropDownField).exists()).toBe(true);
+    });
+
+    it('changes the selected options in drop down field', () => {
+      const Wrapper = shallow(<FamilyFinding />);
+      const testValue = { value: 'Sally Johnson' };
+      Wrapper.instance().handleChangeDropDown(testValue);
+      expect(Wrapper.state('selectedOption')).toEqual(testValue.value);
+    });
   });
 });
