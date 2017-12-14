@@ -1,3 +1,1 @@
-import familyFinding from '../familyFinding';
-
-export default familyFinding;
+import '../familyFinding';

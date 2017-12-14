@@ -15,7 +15,7 @@
     "build": "npm-run-all --serial clean lint:configtest lint:test test build:webpacker"
   },
   "dependencies": {
-    "@rails/webpacker": "^3.0.2",
+    "@rails/webpacker": "^3.1.1",
     "axios": "^0.17.1",
     "enzyme": "^3.1.1",
     "enzyme-adapter-react-16": "^1.0.4",
