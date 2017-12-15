@@ -2,7 +2,7 @@
 
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
-[![Maintainability](https://api.codeclimate.com/v1/badges/ddce5b501816b4bfc1ab/maintainability)](https://codeclimate.com/repos/5991e8661a3e44026400036c/maintainability)
+[![Maintainability](https://api.codeclimate.com/v1/badges/1f18e9807e5cc8ade7e5/maintainability)](https://codeclimate.com/github/ca-cwds/case-management/maintainability)
 
 The Case Management frontend application for Child Welfare Digital Services.
 
