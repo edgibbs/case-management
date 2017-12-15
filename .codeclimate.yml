@@ -1,23 +1,61 @@
-engines:
+version: "2"
+checks:
+  argument-count:
+    enabled: true
+  complex-logic:
+    enabled: true
+  file-lines:
+    enabled: true
+    config:
+      languages:
+        javascript:
+          threshold: 350
+  method-complexity:
+    enabled: true
+  method-count:
+    enabled: true
+  method-lines:
+    enabled: true
+    config:
+      languages:
+        javascript:
+          threshold: 50
+  nested-control-flow:
+    enabled: true
+  return-statements:
+    enabled: true
+  similar-code:
+    enabled: true
+    config:
+      languages:
+        - javascript:
+          enabled: false
+  identical-code:
+    enabled: true
+plugins:
   brakeman:
     enabled: true
   bundler-audit:
     enabled: true
-  csslint:
+  scss-lint:
     enabled: true
   duplication:
+    enabled: true
     exclude_patterns:
-      - "app/javascript/clientIdPage/ClientIdPage.test.js"
       - "spec"
     config:
       languages:
-      - ruby
-      - javascript
+        - ruby
+  rubocop:
+    enabled: true
   eslint:
     enabled: true
-    channel: "eslint-4"
+    channel: eslint-4
     config:
-      config: './.eslintrc-codeclimate.js'
+      config: .eslintrc-codeclimate.js
+      extensions:
+        - .js
+        - .jsx
   fixme:
     enabled: true
   flog:
@@ -29,19 +67,16 @@ engines:
     enabled: true
     issue_override:
       severity: major
-ratings:
-  paths:
-  - Gemfile.lock
-  - "**.erb"
-  - "**.haml"
-  - "**.rb"
-  - "**.js"
-  - "**.jsx"
-exclude_paths:
-- karma.conf.js
-- config/
-- db/
-- vendor/
-- app/assets
-- bin/
-- test/
+exclude_patterns:
+  - "config/"
+  - "db/"
+  - "dist/"
+  - "features/"
+  - "**/node_modules/"
+  - "script/"
+  - "**/spec/"
+  - "**/test/"
+  - "**/tests/"
+  - "**/vendor/"
+  - "**/*.d.ts"
+  - app/assets
