@@ -43,7 +43,7 @@ describe('Client Information', () => {
     });
   });
 
-  describe('should update state based on handleDropdownChange event', () => {
+  describe('#handleDropDownChange()  function', () => {
     it('should an event handler that sets state', () => {
       const instance = clientPage.instance();
       const myFunction = instance.handleDropdownChange('myKey');

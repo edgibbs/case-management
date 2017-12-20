@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ClientInformation from './ClientInformation';
+import OtherClientInformation from './OtherClientInformation';
 import {
   SideBar,
   GlobalHeader,
@@ -31,10 +32,10 @@ export default class ClientIdPage extends React.Component {
             <ClientInformation />
           </div>
           <div className="col-md-9 col-md-offset-3 col-xs-12">
-            <Cards cardHeaderText="Safety Alert Information" />
+            <OtherClientInformation />
           </div>
           <div className="col-md-9 col-md-offset-3 col-xs-12">
-            <Cards cardHeaderText="Other Client Information" />
+            <Cards cardHeaderText="Safety Alert Information" />
           </div>
           <div className="col-md-9 col-md-offset-3 col-xs-12">
             <Cards cardHeaderText="Race & Ethinicity" />

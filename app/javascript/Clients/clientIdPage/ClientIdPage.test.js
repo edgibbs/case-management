@@ -11,7 +11,7 @@ describe('Client ID Page', () => {
     expect(clientPage.find('GlobalHeader').length).toBe(1);
     expect(clientPage.find('PageHeader').length).toBe(1);
     expect(clientPage.find('SideBar').length).toBe(1);
-    expect(clientPage.find('Cards').length).toBe(3);
+    expect(clientPage.find('Cards').length).toBe(2);
   });
 
   it('Has Class Names ', () => {

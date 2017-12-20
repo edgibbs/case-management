@@ -6092,9 +6092,9 @@ react-themeable@^1.1.0:
   dependencies:
     object-assign "^3.0.0"
 
-react-wood-duck@^0.1.39:
-  version "0.1.39"
-  resolved "https://registry.yarnpkg.com/react-wood-duck/-/react-wood-duck-0.1.39.tgz#a0c24429e6431e648ee63dcc82faa467a961bb04"
+react-wood-duck@0.1.40:
+  version "0.1.40"
+  resolved "https://registry.yarnpkg.com/react-wood-duck/-/react-wood-duck-0.1.40.tgz#51887a24dce31b75ec6f75c1b7358ff42bdd0186"
   dependencies:
     babel-runtime "^6.6.1"
     bootstrap "^3.3.7"
