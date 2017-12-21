@@ -30,6 +30,7 @@ module.exports = {
     'jasmine/new-line-before-expect': 0,
     'jasmine/new-line-between-declarations': 2,
   },
+  parser: 'babel-eslint',
   parserOptions: {
     sourceType: 'module',
     ecmaFeatures: {
