@@ -53,15 +53,17 @@ class DashboardContainer extends React.Component {
               <Cards cardHeaderText="Referrals" cardbgcolor="transparent" />
             </div>
             <div className="col-md-3">
-              <Cards cardHeaderText="Quick Links" cardbgcolor="transparent">
-                <div style={{ paddingTop: '1.5rem' }}>
-                  <ul>
-                    <li>
-                      <a href="/clients/show"> Link To Client ID Page </a>{' '}
-                    </li>
-                  </ul>
-                </div>
-              </Cards>
+              <div className="list-group double-gap-top card">
+                <span className="list-group-item">
+                  <span className="card-header">Quick Links</span>
+                </span>
+                <a href="/clients/show" className="list-group-item">
+                  Client ID Page
+                </a>
+                <a href="/family_finding/index" className="list-group-item">
+                  Network Finding Tool
+                </a>
+              </div>
             </div>
           </div>
         </div>
