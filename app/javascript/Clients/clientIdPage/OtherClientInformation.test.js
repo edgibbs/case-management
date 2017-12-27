@@ -12,6 +12,7 @@ describe('Other Client Information', () => {
     expect(otherClient.find('Cards').length).toBeGreaterThan(0);
     expect(otherClient.find('DropDownField').length).toEqual(2);
     expect(otherClient.find('CheckboxRadioGroup').length).toEqual(4);
+    expect(otherClient.find('Button').length).toEqual(2);
   });
 
   describe('#handleChange() Functions', () => {

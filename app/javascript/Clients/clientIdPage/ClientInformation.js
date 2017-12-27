@@ -6,6 +6,7 @@ import {
   DateTimePicker,
   CheckboxRadioGroup,
   Table,
+  Button,
 } from 'react-wood-duck';
 
 const gender = [
@@ -283,6 +284,12 @@ export default class ClientInformation extends React.Component {
         <div className="col-md-4 col-sm-6 col-xs-12">
           <label htmlFor="END DATE">END DATE</label>
           <DateTimePicker fieldClassName="form-group" />
+        </div>
+        <div className="pull-right col-md-2">
+          <Button btnClassName="primary" btnName="save" />
+        </div>
+        <div className="pull-right col-md-2">
+          <Button btnClassName="default" btnName="cancel" disabled={false} />
         </div>
       </Cards>
     );

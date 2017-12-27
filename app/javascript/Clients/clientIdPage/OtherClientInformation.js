@@ -1,5 +1,10 @@
 import React from 'react';
-import { DropDownField, Cards, CheckboxRadioGroup } from 'react-wood-duck';
+import {
+  DropDownField,
+  Cards,
+  CheckboxRadioGroup,
+  Button,
+} from 'react-wood-duck';
 
 const primaryLanguage = [
   { value: 'English', label: 'English' },
@@ -78,7 +83,6 @@ export default class OtherClientInformation extends React.Component {
               onChange={this.handleDropdownChange('secondaryLanguage')}
             />
           </div>
-
           <div className="col-md-6 ">
             <label htmlFor="Spoken in Home">Spoken in Home</label>
             <CheckboxRadioGroup
@@ -101,7 +105,6 @@ export default class OtherClientInformation extends React.Component {
               selectedOptions={this.state.spokenInSelection}
             />
           </div>
-
           <div className="col-md-6 ">
             <label htmlFor="Literate">Literate</label>
             <CheckboxRadioGroup
@@ -123,6 +126,12 @@ export default class OtherClientInformation extends React.Component {
               handleOnChange={this.handleIncapacitated}
               selectedOptions={this.state.incapacitatedParentSelection}
             />
+          </div>
+          <div className="pull-right col-md-2">
+            <Button btnClassName="primary" btnName="save" />
+          </div>
+          <div className="pull-right col-md-2">
+            <Button btnClassName="default" btnName="cancel" disabled={false} />
           </div>
         </div>
       </Cards>
