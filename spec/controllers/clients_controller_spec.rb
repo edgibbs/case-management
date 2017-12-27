@@ -5,15 +5,15 @@ require 'rails_helper'
 describe ClientsController do
   describe '#show' do
     it 'has route' do
-      expect(get: 'clients/show').to route_to(
+      expect(get: 'clients/index').to route_to(
         controller: 'clients',
-        action: 'show'
+        action: 'index'
       )
     end
 
     it 'renders show template' do
-      get :show
-      expect(response).to render_template 'show'
+      get :index
+      expect(response).to render_template 'index'
     end
   end
 end

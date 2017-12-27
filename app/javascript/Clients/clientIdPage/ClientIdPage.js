@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ClientInformation from './ClientInformation';
 import OtherClientInformation from './OtherClientInformation';
+import SafetyAlertInformation from './SafetyAlertInformation';
 import {
   SideBar,
   GlobalHeader,
@@ -91,7 +92,7 @@ export default class ClientIdPage extends React.Component {
               }}
               className="col-md-9 col-md-offset-3 col-xs-12"
             >
-              <Cards cardHeaderText="Safety Alert Information" />
+              <SafetyAlertInformation />
             </div>
             <div
               ref={ref => {

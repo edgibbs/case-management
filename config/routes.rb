@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'dashboard#index'
 
-  get 'clients/show'
+  get 'clients/index'
   get 'family_finding/index'
 
   namespace :api do

@@ -57,7 +57,7 @@ class DashboardContainer extends React.Component {
                 <span className="list-group-item">
                   <span className="card-header">Quick Links</span>
                 </span>
-                <a href="/clients/show" className="list-group-item">
+                <a href="/clients/index" className="list-group-item">
                   Client ID Page
                 </a>
                 <a href="/family_finding/index" className="list-group-item">
