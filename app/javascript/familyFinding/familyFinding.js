@@ -29,31 +29,35 @@ export default class FamilyFinding extends React.Component {
     const cardProps = {
       cardHeaderText: 'Card',
       cardbgcolor: 'transparent',
-      columnLargeWidth: 9,
-      columnMediumWidth: 9,
-      offsetMediumValue: 3,
-      columnXsmallWidth: 9,
+      columnLargeWidth: 0,
+      columnMediumWidth: 0,
+      offsetMediumValue: 0,
+      columnXsmallWidth: 0,
       wrapContainer: '',
     };
     return (
       <div>
         <GlobalHeader />
-        <PageHeader pageTitle="Find Placement Tool" button={null} />
+        <PageHeader pageTitle="Network Finding Tool" button={null} />
         <div className="container">
           <div className="row">
-            <SideBar>
-              <DropDownField
-                name="Find Placement Dropdown"
-                label="Find Placement For:"
-                options={names}
-                onChange={this.handleChangeDropDown}
-                selectedOption={this.state.selectedOption}
-              />
-              <InputComponent label="Near Zip Code" type="text" />
-            </SideBar>
-            <Cards {...cardProps} />
-            <Cards {...cardProps} />
-            <Cards {...cardProps} />
+            <div className="col-lg-3">
+              <SideBar>
+                <DropDownField
+                  name="Find Placement Dropdown"
+                  label="Find Placement For:"
+                  options={names}
+                  onChange={this.handleChangeDropDown}
+                  selectedOption={this.state.selectedOption}
+                />
+                <InputComponent label="Near Zip Code" type="text" />
+              </SideBar>
+            </div>
+            <div className="col-lg-9">
+              <Cards {...cardProps} />
+              <Cards {...cardProps} />
+              <Cards {...cardProps} />
+            </div>
           </div>
         </div>
       </div>
