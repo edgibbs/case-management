@@ -1,4 +1,9 @@
 development:
   case_api_base_url: 'https://casemgmapi.dev.cwds.io'
+  perry_api_base_url: 'http://perry.local.cwds.io'
 test:
   case_api_base_url: 'https://casemgmapi.test.cwds.io'
+  perry_api_base_url: 'https://perry.test.cwds.io'
+preint:
+  case_api_base_url: 'https://casemgmapi.preint.cwds.io'
+  perry_api_base_url: 'https://web.preint.cwds.io/perry'
