@@ -4,15 +4,20 @@
   "private": true,
   "scripts": {
     "prettier:check": "prettier --list-different --config ./.prettierrc \"app/javascript/**/*.js?(x)\"",
-    "test": "jest --env=jsdom --coverage",
-    "lint:test": "eslint \"app/javascript/**/*.{js,jsx}\"",
+    "test": "run-s test:*",
+    "test:jest": "jest --env=jsdom --coverage",
+    "test:rspec": "bundle exec rspec",
+    "test:jest:watch": "npm run test:jest -- --watch",
+    "lint:test:eslint": "eslint --format tap \"app/javascript/**/*.{js,jsx}\"",
+    "lint:test:rubocop": "bundle exec rubocop --format tap",
+    "lint:test": "run-p --print-label lint:test:*",
     "lint:configtest": "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
-    "lint": "npm-run-all lint:test lint:configtest",
+    "lint": "npm-run-all lint:configtest lint:test",
     "license-dump": "license-checker --csv",
     "clean": "rimraf public/packs*",
     "build:webpacker": "./bin/webpack",
     "start": "scripts/start.sh",
-    "build": "npm-run-all --serial clean lint:configtest lint:test test build:webpacker"
+    "build": "npm-run-all --serial clean lint test build:webpacker"
   },
   "dependencies": {
     "@rails/webpacker": "^3.1.1",
