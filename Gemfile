@@ -58,6 +58,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'brakeman'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'rubocop'
   # Spring speeds up development by keeping your application running
