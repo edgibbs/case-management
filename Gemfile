@@ -59,6 +59,7 @@ end
 
 group :development do
   gem 'brakeman'
+  gem 'bundler-audit'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'rubocop'
   # Spring speeds up development by keeping your application running
