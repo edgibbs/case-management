@@ -10,6 +10,7 @@
     "test:jest:watch": "npm run test:jest -- --watch",
     "lint:test:eslint": "eslint --format tap \"app/javascript/**/*.{js,jsx}\"",
     "lint:test:rubocop": "bundle exec rubocop --format tap",
+    "lint:test:scss": "stylelint \"app/{assets,javascript}/**/*.{scss,css}\"",    
     "lint:test": "run-p --print-label lint:test:*",
     "lint:configtest": "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
     "lint": "npm-run-all lint:configtest lint:test",
@@ -28,7 +29,9 @@
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-wood-duck": "^0.1.42",
-    "sass-loader": "^6.0.6"
+    "sass-loader": "^6.0.6",
+    "stylelint": "^8.4.0",
+    "stylelint-config-standard": "^18.0.0"
   },
   "devDependencies": {
     "@types/enzyme": "^3.1.5",

@@ -37,8 +37,11 @@ plugins:
     enabled: true
   bundler-audit:
     enabled: true
-  scss-lint:
-    enabled: true
+  stylelint:
+    enabled: true  
+    exclude_patterns:
+    - "public/"
+    - "yarn.lock"
   duplication:
     enabled: true
     exclude_patterns:
