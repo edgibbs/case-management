@@ -6,7 +6,7 @@ module Infrastructure
   describe SecurityGateway do
     let(:security_gateway) { SecurityGateway.new }
 
-    describe '#validate_token' do
+    describe '#valid_token?' do
       let(:response) { instance_double('Faraday::Response') }
 
       context 'with a valid token' do
@@ -16,7 +16,7 @@ module Infrastructure
           allow(Faraday).to receive(:get)
             .with('https://perry.test.cwds.io/authn/validate?token=valid_token')
             .and_return(response)
-          expect(security_gateway.validate_token('valid_token')).to eq 'json'
+          expect(security_gateway.valid_token?('valid_token')).to eq 'json'
         end
       end
 
@@ -26,7 +26,7 @@ module Infrastructure
           allow(Faraday).to receive(:get)
             .with('https://perry.test.cwds.io/authn/validate?token=invalid_token')
             .and_return(response)
-          expect(security_gateway.validate_token('invalid_token')).to eq nil
+          expect(security_gateway.valid_token?('invalid_token')).to eq nil
         end
       end
     end

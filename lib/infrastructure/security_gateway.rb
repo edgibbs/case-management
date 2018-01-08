@@ -2,7 +2,7 @@
 
 module Infrastructure
   class SecurityGateway
-    def validate_token(token)
+    def valid_token?(token)
       response = Faraday.get(validation_url(token))
       response.body if response.status == 200
     end

@@ -9,12 +9,8 @@ module Infrastructure
     def call(environment)
       return @application.call(environment) unless Feature.active?(:authentication)
       request = Rack::Request.new(environment)
-      return redirect_to_login(request.url) if no_token_or_session(request)
-      if request.params['token']
-        response = SecurityGateway.new.validate_token(request.params['token'])
-        return redirect_to_login(request.url) unless response
-        request.session['token'] = request.params['token']
-      end
+      return redirect_to_login(request.url) unless SecurityPolicy.new.valid?(request)
+      request.session['token'] = request.params['token'] unless request.params['token'].blank?
       @application.call(environment)
     end
 
@@ -26,10 +22,6 @@ module Infrastructure
 
     def login_url(callback)
       "#{Rails.configuration.micro_services['perry_api_base_url']}/authn/login?callback=#{callback}"
-    end
-
-    def no_token_or_session(request)
-      request.session['token'].blank? && request.params['token'].blank?
     end
   end
 end

@@ -23,3 +23,6 @@ Metrics/LineLength:
 Metrics/MethodLength:
   Exclude:
     - 'spec/**/*.rb'
+Metrics/ModuleLength:
+  Exclude:
+    - 'spec/**/*.rb'
