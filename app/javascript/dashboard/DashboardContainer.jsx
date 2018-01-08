@@ -51,7 +51,7 @@ class DashboardContainer extends React.Component {
       <DataGridCard
         cardHeaderText={getCardHeaderText(this.state.cases, 'Cases')}
         status={this.state.cases.XHRStatus}
-        columns={['Name', 'Type', 'Recieved Date']}
+        columns={['Name', 'Service Component', 'Assignment Type']}
         rows={
           this.state.cases.records &&
           this.state.cases.records.map(record => [
@@ -69,11 +69,12 @@ class DashboardContainer extends React.Component {
       <DataGridCard
         cardHeaderText={getCardHeaderText(this.state.referrals, 'Referrals')}
         status={this.state.referrals.XHRStatus}
-        columns={['Name', 'Type', 'Received Data']}
+        columns={['Name', 'Response Time', 'Assignment Type', 'Received Date']}
         rows={
           this.state.referrals.records &&
           this.state.referrals.records.map(record => [
             record.referral_name,
+            record.referral_response_type,
             record.assignment_type,
             record.received_date,
           ])
