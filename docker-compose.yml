@@ -1,18 +1,42 @@
 version: '3.2'
 services:
+  db2:
+    image: cwds/db2data
+    env_file: .env
+    hostname: db2
+    ports:
+      - ${DB_CMS_DB2_PORT}:${DB_CMS_DB2_PORT}
+    environment:
+      DB2INST1_PASSWORD: ${DB_CMS_PASSWORD}
+      LICENSE: "accept"
+      DB2NAME: ${DB_CMS_DB_NAME}
   redis:
     image: redis
     ports:
       - "6379:6379"
-  web:
-      build: .
-      volumes:
-        - type: bind
-          source: ./app
-          target: /app/app
-      ports:
-        - "3000:3000"
-        - "3035:3035"
-      command: ['foreman', 'start', '-f', 'Procfile.dev.docker']
-      depends_on:
-        - redis
+  case-api:
+    image: ${REPOSITORY}/case-management-api
+    hostname: casemanagement
+    depends_on:
+      - db2
+    restart: on-failure
+    ports:
+      - ${CASE_API_PORT}:${CASE_API_PORT}
+    env_file: .env
+    environment:
+      SHIRO_CONFIG_PATH: ${SHIRO_NOSEC_CONFIG_PATH}
+      KEY_STORE_FILE: ${KEY_STORE_FILE}
+      DB_CMS_JDBC_URL: "jdbc:db2://db2:${DB_CMS_DB2_PORT}/${DB_CMS_DB_NAME}"
+      DB_RS_JDBC_URL: "jdbc:db2://db2:${DB_CMS_DB2_PORT}/${DB_CMS_DB_NAME}"
+  case-web:
+    build: .
+    volumes:
+      - type: bind
+        source: ./app
+        target: /app/app
+    ports:
+      - "3000:3000"
+      - "3035:3035"
+    command: ['foreman', 'start', '-f', 'Procfile.dev.docker']
+    depends_on:
+      - redis

@@ -10,6 +10,7 @@ end
 gem 'dry-struct', '~> 0.4.0'
 gem 'dry-types', '~> 0.12.2'
 gem 'faraday', '~> 0.13.1'
+gem 'faraday_middleware', '~> 0.12.2'
 gem 'feature'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'

@@ -18,7 +18,9 @@
     "clean": "rimraf public/packs*",
     "build:webpacker": "./bin/webpack",
     "start": "scripts/start.sh",
-    "build": "npm-run-all --serial clean lint test build:webpacker"
+    "build": "npm-run-all --serial clean lint test build:webpacker",
+    "dc:up": "docker-compose up",
+    "dc:rebuild": "docker-compose stop case-web && docker-compose build case-web && docker-compose up -d case-web"
   },
   "dependencies": {
     "@rails/webpacker": "^3.1.1",
@@ -36,6 +38,8 @@
   "devDependencies": {
     "@types/enzyme": "^3.1.5",
     "@types/jasmine": "^2.8.2",
+    "@types/jest": "^22.0.0",
+    "@types/moxios": "^0.4.8",
     "@types/prop-types": "^15.5.2",
     "@types/react": "^16.0.28",
     "@types/react-dom": "^16.0.3",
@@ -62,6 +66,7 @@
     "eslint-plugin-standard": "^3.0.1",
     "jest": "^21.2.1",
     "license-checker": "^15.0.0",
+    "moxios": "^0.4.0",
     "npm-run-all": "^4.1.1",
     "postcss-smart-import": "^0.7.6",
     "prettier": "^1.7.4",

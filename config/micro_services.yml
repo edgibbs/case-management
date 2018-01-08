@@ -1,5 +1,5 @@
 development:
-  case_api_base_url: 'https://casemgmapi.dev.cwds.io'
+  case_api_base_url: 'http://case-api:8080' # 'https://casemgmapi.dev.cwds.io'
   perry_api_base_url: 'http://perry.local.cwds.io'
 test:
   case_api_base_url: 'https://casemgmapi.test.cwds.io'

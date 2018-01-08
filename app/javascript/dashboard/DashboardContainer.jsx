@@ -1,35 +1,87 @@
 import React from 'react';
-import axios from 'axios';
-import { GlobalHeader, PageHeader, Cards, Alert } from 'react-wood-duck';
-import Caseload from '../_components/Caseload';
+import { GlobalHeader, PageHeader } from 'react-wood-duck';
+import { DataGridCard } from '../_components';
+import CaseService from '../_services/case';
+import ReferralService from '../_services/referral';
 
 class DashboardContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      caseload: {
-        XHRStatus: 'waiting',
-      },
+      cases: { XHRStatus: 'idle' },
+      referrals: { XHRStatus: 'idle' },
     };
   }
+
   componentDidMount() {
-    setTimeout(() => {
-      axios
-        .get('/api/cases/123/index')
-        .then(res => {
-          this.setState({
-            ...this.state,
-            caseload: {
-              XHRStatus: 'ready',
-              records: res.data,
-            },
-          });
-        })
-        .catch(e => {
-          throw e;
-        });
-    }, 750);
+    this.fetchCases();
+    this.fetchReferrals();
   }
+
+  fetchReferrals = () => {
+    this.setState({ referrals: { XHRStatus: 'waiting' } });
+    return ReferralService.fetch()
+      .then(referrals =>
+        this.setState({
+          referrals: {
+            XHRStatus: 'ready',
+            records: referrals,
+          },
+        })
+      )
+      .catch(() => this.setState({ referrals: { XHRStatus: 'error' } }));
+  };
+
+  fetchCases = () => {
+    this.setState({ cases: { XHRStatus: 'waiting' } });
+    return CaseService.fetch()
+      .then(cases =>
+        this.setState({
+          cases: {
+            XHRStatus: 'ready',
+            records: cases,
+          },
+        })
+      )
+      .catch(() => this.setState({ cases: { XHRStatus: 'error' } }));
+  };
+
+  renderCases = () => {
+    return (
+      <DataGridCard
+        cardHeaderText={getCardHeaderText(this.state.cases, 'Cases')}
+        status={this.state.cases.XHRStatus}
+        columns={['Name', 'Type', 'Recieved Date']}
+        rows={
+          this.state.cases.records &&
+          this.state.cases.records.map(record => [
+            record.case_name,
+            record.active_service_component,
+            record.assignment_type,
+          ])
+        }
+      />
+    );
+  };
+
+  renderReferrals = () => {
+    return (
+      <DataGridCard
+        cardHeaderText={getCardHeaderText(this.state.referrals, 'Referrals')}
+        status={this.state.referrals.XHRStatus}
+        columns={['Name', 'Type', 'Received Data']}
+        rows={
+          this.state.referrals.records &&
+          this.state.referrals.records.map(record => [
+            record.referral_name,
+            record.assignment_type,
+            record.received_date,
+          ])
+        }
+      />
+    );
+  };
+
   render() {
     return (
       <div>
@@ -38,19 +90,8 @@ class DashboardContainer extends React.Component {
         <div className="container">
           <div className="row">
             <div className="col-md-9">
-              <Caseload
-                status={this.state.caseload.XHRStatus}
-                cases={this.state.caseload.records}
-                renderEmpty={() => (
-                  <Alert
-                    alertClassName="info"
-                    alertMessage="Your caseload is empty!"
-                    alertCross={null}
-                    faIcon="fa-rocket"
-                  />
-                )}
-              />
-              <Cards cardHeaderText="Referrals" cardbgcolor="transparent" />
+              {this.renderCases()}
+              {this.renderReferrals()}
             </div>
             <div className="col-md-3">
               <div className="list-group double-gap-top card">
@@ -73,3 +114,9 @@ class DashboardContainer extends React.Component {
 }
 
 export default DashboardContainer;
+
+function getCardHeaderText({ XHRStatus, records }, text) {
+  return XHRStatus === 'ready' && records && records.length
+    ? `${text} (${records.length})`
+    : text;
+}
