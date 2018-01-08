@@ -10,7 +10,7 @@
     "test:jest:watch": "npm run test:jest -- --watch",
     "lint:test:eslint": "eslint --format tap \"app/javascript/**/*.{js,jsx}\"",
     "lint:test:rubocop": "bundle exec rubocop --format tap",
-    "lint:test:scss": "stylelint \"app/{assets,javascript}/**/*.{scss,css}\"",    
+    "lint:test:stylelint": "stylelint --custom-formatter scripts/stylelint-formatter.tap.js \"app/{assets,javascript}/**/*.{scss,css}\"",
     "lint:test": "run-p --print-label lint:test:*",
     "lint:configtest": "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
     "lint": "npm-run-all lint:configtest lint:test",
