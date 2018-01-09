@@ -14,7 +14,7 @@
     "lint:test": "run-p --print-label lint:test:*",
     "lint:configtest": "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
     "lint": "npm-run-all lint:configtest lint:test",
-    "license-dump": "license-checker --csv",
+    "license-dump": "license-checker --csv --out legal/licenses.csv",
     "clean": "rimraf public/packs*",
     "build:webpacker": "./bin/webpack",
     "start": "scripts/start.sh",
