@@ -35,8 +35,8 @@ describe('Client ID Page', () => {
     expect(clientPage.find('SafetyAlertInformation').length).toBe(1);
   });
 
-  it('Has Cards ', () => {
-    expect(clientPage.find('Cards').length).toBe(1);
+  it('Has Ethnicity ', () => {
+    expect(clientPage.find('Ethnicity').length).toBe(1);
   });
 
   it('should an event handler that sets state', () => {

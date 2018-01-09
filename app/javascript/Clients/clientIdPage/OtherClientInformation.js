@@ -45,17 +45,17 @@ export default class OtherClientInformation extends React.Component {
     this.handleIncapacitated = this.handleIncapacitated.bind(this);
   }
 
-  handleSpokenChange(e) {
-    this.setState({ selected: [e.target.value] });
+  handleSpokenChange(event) {
+    this.setState({ selected: [event.target.value] });
   }
-  handleSpokenInChange(e) {
-    this.setState({ spokenInSelection: [e.target.value] });
+  handleSpokenInChange(event) {
+    this.setState({ spokenInSelection: [event.target.value] });
   }
-  handleLiterateChange(e) {
-    this.setState({ literateSelection: [e.target.value] });
+  handleLiterateChange(event) {
+    this.setState({ literateSelection: [event.target.value] });
   }
-  handleIncapacitated(e) {
-    this.setState({ incapacitatedParentSelection: [e.target.value] });
+  handleIncapacitated(event) {
+    this.setState({ incapacitatedParentSelection: [event.target.value] });
   }
   handleDropdownChange(name) {
     return ({ value }) => this.setState({ [name]: value });
@@ -63,7 +63,10 @@ export default class OtherClientInformation extends React.Component {
 
   render() {
     return (
-      <Cards cardHeaderText="Other Client Information">
+      <Cards
+        cardHeaderText="Other Client Information"
+        cardbgcolor="transparent"
+      >
         <div>
           <div>
             <DropDownField

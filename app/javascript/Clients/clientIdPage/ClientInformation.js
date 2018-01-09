@@ -5,9 +5,9 @@ import {
   Cards,
   DateTimePicker,
   CheckboxRadioGroup,
-  Table,
   Button,
 } from 'react-wood-duck';
+import Table from '../../_components/Table';
 
 const gender = [
   { value: 'Male', label: 'Male' },
@@ -55,8 +55,8 @@ export default class ClientInformation extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleDropdownChange = this.handleDropdownChange.bind(this);
   }
-  handleChange(e) {
-    const newSelection = e.target.value;
+  handleChange(event) {
+    const newSelection = event.target.value;
     let newSelectionArray;
     if (this.state.selected.indexOf(newSelection) > -1) {
       newSelectionArray = this.state.selected.filter(s => s !== newSelection);
@@ -72,7 +72,7 @@ export default class ClientInformation extends React.Component {
 
   render() {
     return (
-      <Cards cardHeaderText="Client Information">
+      <Cards cardHeaderText="Client Information" cardbgcolor="transparent">
         <div>
           <InputComponent
             gridClassName="col-md-1 col-sm-6 col-xs-12"
@@ -268,22 +268,24 @@ export default class ClientInformation extends React.Component {
             />
           </div>
         </div>
-        <Table />
-        <DropDownField
-          id="dropdown6"
-          gridClassName="col-md-4 col-sm-6 col-xs-12"
-          selectedOption={this.state.StateTypesValue}
-          options={stateTypes}
-          label="CSEC Data Type"
-          onChange={this.handleDropdownChange('StateTypesValue')}
-        />
-        <div className="col-md-4 col-sm-6 col-xs-12">
-          <label htmlFor="START DATE">START DATE</label>
-          <DateTimePicker />
-        </div>
-        <div className="col-md-4 col-sm-6 col-xs-12">
-          <label htmlFor="END DATE">END DATE</label>
-          <DateTimePicker fieldClassName="form-group" />
+        <Table colNames={['CSEC Type', 'Start Date', 'End Date']} />
+        <div>
+          <DropDownField
+            id="dropdown6"
+            gridClassName="col-md-4 col-sm-6 col-xs-12"
+            selectedOption={this.state.StateTypesValue}
+            options={stateTypes}
+            label="CSEC Data Type"
+            onChange={this.handleDropdownChange('StateTypesValue')}
+          />
+          <div className="col-md-4 col-sm-6 col-xs-12">
+            <label htmlFor="START DATE">START DATE</label>
+            <DateTimePicker />
+          </div>
+          <div className="col-md-4 col-sm-6 col-xs-12">
+            <label htmlFor="END DATE">END DATE</label>
+            <DateTimePicker fieldClassName="form-group" />
+          </div>
         </div>
         <div className="pull-right col-md-2">
           <Button btnClassName="primary" btnName="save" />

@@ -1,12 +1,12 @@
 import React from 'react';
 import {
   Cards,
-  Table,
   DropDownField,
   DateTimePicker,
   TextArea,
   Button,
 } from 'react-wood-duck';
+import Table from '../../_components/Table';
 
 const activationinCounty = [
   { value: 'Los Angeles County', label: 'Los Angeles County' },
@@ -44,18 +44,21 @@ export default class SafetyAlertInformation extends React.Component {
   onChange(name) {
     return ({ value }) => this.setState({ [name]: value });
   }
-  handleExplanationChange(e) {
-    this.setState({ explanation: e.target.value });
+  handleExplanationChange(event) {
+    this.setState({ explanation: event.target.value });
   }
 
-  onChangeDeactive(e) {
-    this.setState({ deactive: e.target.value });
+  onChangeDeactive(event) {
+    this.setState({ deactive: event.target.value });
   }
 
   render() {
     return (
       <div>
-        <Cards cardHeaderText="Safety Alert Information">
+        <Cards
+          cardHeaderText="Safety Alert Information"
+          cardbgcolor="transparent"
+        >
           <div className="row">
             <label
               htmlFor="There are no safety alerts recorded at this point of time"
@@ -65,74 +68,77 @@ export default class SafetyAlertInformation extends React.Component {
             </label>
             <Button btnClassName="default pull-right" btnName="Add Alert" />
           </div>
-          <Table />
-          <label htmlFor="Safety Alert Activation">
-            Safety Alert Activation
-          </label>
+          <Table
+            colNames={['Activation Date', 'Reason', 'Deactivation Date']}
+          />
           <div>
-            <div className="col-md-4 col-sm-6 col-xs-12">
-              <label htmlFor="Activation Date">Activation Date</label>
-              <DateTimePicker />
-            </div>
-            <DropDownField
-              id="dropdown1"
-              gridClassName="col-md-4 col-sm-6 col-xs-12"
-              selectedOption={this.state.activationinCounty}
-              options={activationinCounty}
-              label="County"
-              onChange={this.onChange('activationinCounty')}
-            />
-            <DropDownField
-              id="dropdown1"
-              gridClassName="col-md-4 col-sm-6 col-xs-12"
-              selectedOption={this.state.reasons}
-              options={reasons}
-              label="Reason"
-              onChange={this.onChange('reasons')}
-            />
-            <TextArea
-              gridClassName="col-md-12 col-sm-12 col-xs-12"
-              labelClassName="form-control"
-              label="Explanation"
-              rows={5}
-              resize={false}
-              value={this.state.explanation}
-              name={'Explanation'}
-              handleOnChange={this.handleExplanationChange}
-              placeholder={''}
-            />
-          </div>
-          <div> </div>
-          <div className="row">
-            <label
-              htmlFor="Safety Alert Deactivation"
-              className="col-md-12 col-sm-6 col-xs-12"
-            >
-              Safety Alert Deactivation
+            <label htmlFor="Safety Alert Activation">
+              Safety Alert Activation
             </label>
-            <div className="col-md-4 col-sm-6 col-xs-12">
-              <label htmlFor="Deactivation Date">Deactivation Date</label>
-              <DateTimePicker />
+            <div>
+              <div className="col-md-4 col-sm-6 col-xs-12">
+                <label htmlFor="Activation Date">Activation Date</label>
+                <DateTimePicker />
+              </div>
+              <DropDownField
+                id="dropdown1"
+                gridClassName="col-md-4 col-sm-6 col-xs-12"
+                selectedOption={this.state.activationinCounty}
+                options={activationinCounty}
+                label="County"
+                onChange={this.onChange('activationinCounty')}
+              />
+              <DropDownField
+                id="dropdown1"
+                gridClassName="col-md-4 col-sm-6 col-xs-12"
+                selectedOption={this.state.reasons}
+                options={reasons}
+                label="Reason"
+                onChange={this.onChange('reasons')}
+              />
+              <TextArea
+                gridClassName="col-md-12 col-sm-12 col-xs-12"
+                labelClassName="form-control"
+                label="Explanation"
+                rows={5}
+                resize={false}
+                value={this.state.explanation}
+                name={'Explanation'}
+                handleOnChange={this.handleExplanationChange}
+                placeholder={''}
+              />
             </div>
-            <DropDownField
-              id="dropdown1"
-              gridClassName="col-md-4 col-sm-6 col-xs-12"
-              selectedOption={this.state.deactivationinCounty}
-              options={deactivationinCounty}
-              label="County"
-              onChange={this.onChange('deactivationinCounty')}
-            />
-            <TextArea
-              gridClassName="col-md-12 col-sm-12 col-xs-12"
-              labelClassName="form-control"
-              label="Explanation"
-              rows={5}
-              resize={false}
-              value={this.state.deactive}
-              name={'Explanation'}
-              handleOnChange={this.onChangeDeactive}
-              placeholder={''}
-            />
+            <div className="row">
+              <label
+                htmlFor="Safety Alert Deactivation"
+                className="col-md-12 col-sm-6 col-xs-12"
+              >
+                Safety Alert Deactivation
+              </label>
+              <div className="col-md-6 col-sm-6 col-xs-12">
+                <label htmlFor="Deactivation Date">Deactivation Date</label>
+                <DateTimePicker />
+              </div>
+              <DropDownField
+                id="dropdown1"
+                gridClassName="col-md-6 col-sm-6 col-xs-12"
+                selectedOption={this.state.deactivationinCounty}
+                options={deactivationinCounty}
+                label="County"
+                onChange={this.onChange('deactivationinCounty')}
+              />
+              <TextArea
+                gridClassName="col-md-12 col-sm-12 col-xs-12"
+                labelClassName="form-control"
+                label="Explanation"
+                rows={5}
+                resize={false}
+                value={this.state.deactive}
+                name={'Explanation'}
+                handleOnChange={this.onChangeDeactive}
+                placeholder={''}
+              />
+            </div>
           </div>
         </Cards>
       </div>
