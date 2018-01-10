@@ -21,7 +21,7 @@ export default class Ethnicity extends React.Component {
     super(props);
     this.state = {
       checked: false,
-      counties: ['Yes', 'No', 'Not Asked', 'Pending'],
+      icwaElegible: ['Yes', 'No', 'Not Asked', 'Pending'],
       selected: [],
     };
     this.handleChange = this.handleChange.bind(this);
@@ -54,7 +54,7 @@ export default class Ethnicity extends React.Component {
               name={'child'}
               type={'radio'}
               handleOnChange={this.handleChange}
-              options={this.state.countys}
+              options={this.state.icwaElegible}
               selectedOptions={this.state.selected}
             />
             <Table colNames={['County', 'Date']} />
