@@ -1,11 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   DropDownField,
   InputComponent,
   Cards,
   DateTimePicker,
   CheckboxRadioGroup,
-  Button,
 } from 'react-wood-duck';
 import Table from '../../_components/Table';
 
@@ -51,6 +51,7 @@ export default class ClientInformation extends React.Component {
       ageUnitValue: '',
       StateTypesValue: '',
       genderValue: '',
+      csecBlock: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleDropdownChange = this.handleDropdownChange.bind(this);
@@ -64,8 +65,15 @@ export default class ClientInformation extends React.Component {
       newSelectionArray = [...this.state.selected, newSelection];
     }
     this.setState({ selected: newSelectionArray });
+    if (
+      event.target.value === 'This case involves CSEC Data' &&
+      event.target.checked
+    ) {
+      this.setState({ csecBlock: true });
+    } else {
+      this.setState({ csecBlock: false });
+    }
   }
-
   handleDropdownChange(name) {
     return ({ value }) => this.setState({ [name]: value });
   }
@@ -268,31 +276,27 @@ export default class ClientInformation extends React.Component {
             />
           </div>
         </div>
-        <Table colNames={['CSEC Type', 'Start Date', 'End Date']} />
-        <div>
-          <DropDownField
-            id="dropdown6"
-            gridClassName="col-md-4 col-sm-6 col-xs-12"
-            selectedOption={this.state.StateTypesValue}
-            options={stateTypes}
-            label="CSEC Data Type"
-            onChange={this.handleDropdownChange('StateTypesValue')}
-          />
-          <div className="col-md-4 col-sm-6 col-xs-12">
-            <label htmlFor="START DATE">START DATE</label>
-            <DateTimePicker />
+        {this.state.csecBlock && (
+          <div>
+            <Table colNames={['CSEC Type', 'Start Date', 'End Date']} />
+            <DropDownField
+              id="dropdown6"
+              gridClassName="col-md-4 col-sm-6 col-xs-12"
+              selectedOption={this.state.StateTypesValue}
+              options={stateTypes}
+              label="CSEC Data Type"
+              onChange={this.handleDropdownChange('StateTypesValue')}
+            />
+            <div className="col-md-4 col-sm-6 col-xs-12">
+              <label htmlFor="START DATE">START DATE</label>
+              <DateTimePicker />
+            </div>
+            <div className="col-md-4 col-sm-6 col-xs-12">
+              <label htmlFor="END DATE">END DATE</label>
+              <DateTimePicker fieldClassName="form-group" />
+            </div>
           </div>
-          <div className="col-md-4 col-sm-6 col-xs-12">
-            <label htmlFor="END DATE">END DATE</label>
-            <DateTimePicker fieldClassName="form-group" />
-          </div>
-        </div>
-        <div className="pull-right col-md-2">
-          <Button btnClassName="primary" btnName="save" />
-        </div>
-        <div className="pull-right col-md-2">
-          <Button btnClassName="default" btnName="cancel" disabled={false} />
-        </div>
+        )}
       </Cards>
     );
   }

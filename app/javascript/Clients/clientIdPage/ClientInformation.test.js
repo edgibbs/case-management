@@ -17,18 +17,6 @@ describe('Client Information', () => {
     expect(clientPage.find('InputComponent').length).toBe(11);
   });
 
-  it('renders DropDownField components', () => {
-    expect(clientPage.find('DropDownField').length).toBe(6);
-  });
-
-  it('renders DateTime Picker components', () => {
-    expect(clientPage.find('DateTimePicker').length).toBe(4);
-  });
-
-  it('renders Table', () => {
-    expect(clientPage.find('Table').length).toBe(1);
-  });
-
   it('renders CheckboxRadioGroup components', () => {
     expect(clientPage.find('CheckboxRadioGroup').length).toBe(5);
   });
@@ -51,6 +39,22 @@ describe('Client Information', () => {
         myFunction({ value: 'myVal' });
       }).not.toThrow();
       expect(instance.state.myKey).toEqual('myVal');
+    });
+
+    it('toggles true when checked CSEC data', () => {
+      const wrapper = clientPage.instance();
+      wrapper.handleChange({
+        target: { value: 'This case involves CSEC Data', checked: true },
+      });
+      expect(wrapper.state.csecBlock).toEqual(true);
+    });
+
+    it('dropdown is available on click', () => {
+      expect(clientPage.find('DropDownField').length).toBe(5);
+      expect(clientPage.find('DateTimePicker').length).toBe(2);
+      clientPage.setState({ csecBlock: true });
+      expect(clientPage.find('DropDownField').length).toBe(6);
+      expect(clientPage.find('DateTimePicker').length).toBe(4);
     });
   });
 });
