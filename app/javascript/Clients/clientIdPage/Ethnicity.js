@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   DropDownField,
   Cards,
@@ -44,7 +45,12 @@ export default class Ethnicity extends React.Component {
 
   render() {
     return (
-      <Cards cardHeaderText="Race & Ethnicity" cardbgcolor="transparent">
+      <Cards
+        cardHeaderText="Race & Ethnicity"
+        id={this.props.anchorId}
+        cardHeaderButton={false}
+        cardActionButtons={true}
+      >
         <div>
           <RaceFormContainer />
           <div>
@@ -78,3 +84,6 @@ export default class Ethnicity extends React.Component {
     );
   }
 }
+Ethnicity.propTypes = {
+  anchorId: PropTypes.string,
+};

@@ -1,7 +1,6 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import ClientIdPage from './ClientIdPage.js';
-import { SideBar } from 'react-wood-duck';
 
 describe('Client ID Page', () => {
   const pageTitle = 'Child Name';
@@ -19,10 +18,6 @@ describe('Client ID Page', () => {
     expect(clientPage.find('PageHeader').length).toBe(1);
   });
 
-  it('Has SideBar  ', () => {
-    expect(clientPage.find('SideBar').length).toBe(1);
-  });
-
   it('Has ClientInformation', () => {
     expect(clientPage.find('ClientInformation').length).toBe(1);
   });
@@ -37,15 +32,6 @@ describe('Client ID Page', () => {
 
   it('Has Ethnicity ', () => {
     expect(clientPage.find('Ethnicity').length).toBe(1);
-  });
-
-  it('should an event handler that sets state', () => {
-    let component = mount(<ClientIdPage />).instance();
-    component.handleSelect('selectedNav', {
-      stopPropagation: () => {},
-      preventDefault: () => {},
-    });
-    expect(component.state.selectedNav).toEqual('selectedNav');
   });
 
   it('Has Class Names ', () => {
@@ -72,32 +58,12 @@ describe('Client ID Page', () => {
         .find('div')
         .at(3)
         .props().className
-    ).toBe('col-md-9 col-md-offset-3 col-xs-12');
+    ).toBe('col-sm-3');
     expect(
       clientPage
         .find('div')
         .at(4)
         .props().className
-    ).toBe('col-md-9 col-md-offset-3 col-xs-12');
-    expect(
-      clientPage
-        .find('div')
-        .at(5)
-        .props().className
-    ).toBe('col-md-9 col-md-offset-3 col-xs-12');
-    expect(
-      clientPage
-        .find('div')
-        .at(6)
-        .props().className
-    ).toBe('col-md-9 col-md-offset-3 col-xs-12');
-  });
-
-  it('has a <SideBar />', () => {
-    expect(clientPage.find(SideBar).exists()).toBe(true);
-  });
-
-  it('passes children to <SideBar />', () => {
-    expect(clientPage.first(SideBar).prop('children')).toBeTruthy();
+    ).toBe('col-sm-9');
   });
 });

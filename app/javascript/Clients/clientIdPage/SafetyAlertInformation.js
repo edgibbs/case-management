@@ -1,12 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   Cards,
+  Table,
   DropDownField,
   DateTimePicker,
   TextArea,
   Button,
 } from 'react-wood-duck';
-import Table from '../../_components/Table';
 
 const activationinCounty = [
   { value: 'Los Angeles County', label: 'Los Angeles County' },
@@ -35,79 +36,87 @@ export default class SafetyAlertInformation extends React.Component {
       reasons: '',
       explanation: '',
       deactive: '',
+      addAlert: false,
     };
     this.onChange = this.onChange.bind(this);
     this.handleExplanationChange = this.handleExplanationChange.bind(this);
     this.onChangeDeactive = this.onChangeDeactive.bind(this);
+    this.onClick = this.onClick.bind(this);
   }
 
   onChange(name) {
     return ({ value }) => this.setState({ [name]: value });
   }
-  handleExplanationChange(event) {
-    this.setState({ explanation: event.target.value });
+  handleExplanationChange(e) {
+    this.setState({ explanation: e.target.value });
   }
 
-  onChangeDeactive(event) {
-    this.setState({ deactive: event.target.value });
+  onChangeDeactive(e) {
+    this.setState({ deactive: e.target.value });
+  }
+
+  onClick() {
+    this.setState({ addAlert: true });
   }
 
   render() {
     return (
-      <div>
-        <Cards
-          cardHeaderText="Safety Alert Information"
-          cardbgcolor="transparent"
-        >
-          <div className="row">
-            <label
-              htmlFor="There are no safety alerts recorded at this point of time"
-              className="col-md-8 col-sm-6 col-xs-12"
-            >
-              There are no safety alerts recorded at this point of time
-            </label>
-            <Button btnClassName="default pull-right" btnName="Add Alert" />
-          </div>
-          <Table
-            colNames={['Activation Date', 'Reason', 'Deactivation Date']}
+      <Cards
+        cardHeaderText="Safety Alert Information"
+        id={this.props.anchorId}
+        cardHeaderButton={false}
+        cardActionButtons={true}
+      >
+        <div className="row">
+          <label
+            htmlFor="There are no safety alerts recorded at this point of time"
+            className="col-md-8 col-sm-6 col-xs-12"
+          >
+            There are no safety alerts recorded at this point of time
+          </label>
+          <Button
+            btnClassName="default pull-right"
+            btnName="Add Alert"
+            onClick={this.onClick}
           />
+        </div>
+        <Table />
+        {this.state.addAlert ? (
           <div>
             <label htmlFor="Safety Alert Activation">
               Safety Alert Activation
             </label>
-            <div>
-              <div className="col-md-4 col-sm-6 col-xs-12">
-                <label htmlFor="Activation Date">Activation Date</label>
-                <DateTimePicker />
-              </div>
-              <DropDownField
-                id="dropdown1"
-                gridClassName="col-md-4 col-sm-6 col-xs-12"
-                selectedOption={this.state.activationinCounty}
-                options={activationinCounty}
-                label="County"
-                onChange={this.onChange('activationinCounty')}
-              />
-              <DropDownField
-                id="dropdown1"
-                gridClassName="col-md-4 col-sm-6 col-xs-12"
-                selectedOption={this.state.reasons}
-                options={reasons}
-                label="Reason"
-                onChange={this.onChange('reasons')}
-              />
-              <TextArea
-                gridClassName="col-md-12 col-sm-12 col-xs-12"
-                labelClassName="form-control"
-                label="Explanation"
-                rows={5}
-                resize={false}
-                value={this.state.explanation}
-                name={'Explanation'}
-                handleOnChange={this.handleExplanationChange}
-                placeholder={''}
-              />
+            <div className="col-md-4 col-sm-6 col-xs-12">
+              <label htmlFor="Activation Date">Activation Date</label>
+              <DateTimePicker />
             </div>
+            <DropDownField
+              id="dropdown1"
+              gridClassName="col-md-4 col-sm-6 col-xs-12"
+              selectedOption={this.state.activationinCounty}
+              options={activationinCounty}
+              label="County"
+              onChange={this.onChange('activationinCounty')}
+            />
+            <DropDownField
+              id="dropdown1"
+              gridClassName="col-md-4 col-sm-6 col-xs-12"
+              selectedOption={this.state.reasons}
+              options={reasons}
+              label="Reason"
+              onChange={this.onChange('reasons')}
+            />
+            <TextArea
+              gridClassName="col-md-12 col-sm-12 col-xs-12"
+              labelClassName="form-control"
+              label="Explanation"
+              rows={5}
+              resize={false}
+              value={this.state.explanation}
+              name={'Explanation'}
+              handleOnChange={this.handleExplanationChange}
+              placeholder={''}
+            />
             <div className="row">
               <label
                 htmlFor="Safety Alert Deactivation"
@@ -115,13 +124,13 @@ export default class SafetyAlertInformation extends React.Component {
               >
                 Safety Alert Deactivation
               </label>
-              <div className="col-md-6 col-sm-6 col-xs-12">
+              <div className="col-md-4 col-sm-6 col-xs-12">
                 <label htmlFor="Deactivation Date">Deactivation Date</label>
                 <DateTimePicker />
               </div>
               <DropDownField
                 id="dropdown1"
-                gridClassName="col-md-6 col-sm-6 col-xs-12"
+                gridClassName="col-md-4 col-sm-6 col-xs-12"
                 selectedOption={this.state.deactivationinCounty}
                 options={deactivationinCounty}
                 label="County"
@@ -140,8 +149,11 @@ export default class SafetyAlertInformation extends React.Component {
               />
             </div>
           </div>
-        </Cards>
-      </div>
+        ) : null}
+      </Cards>
     );
   }
 }
+SafetyAlertInformation.propTypes = {
+  anchorId: PropTypes.string,
+};

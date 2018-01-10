@@ -80,7 +80,12 @@ export default class ClientInformation extends React.Component {
 
   render() {
     return (
-      <Cards cardHeaderText="Client Information" cardbgcolor="transparent">
+      <Cards
+        cardHeaderText="Client Information"
+        id={this.props.anchorId}
+        cardHeaderButton={false}
+        cardActionButtons={true}
+      >
         <div>
           <InputComponent
             gridClassName="col-md-1 col-sm-6 col-xs-12"
@@ -279,21 +284,23 @@ export default class ClientInformation extends React.Component {
         {this.state.csecBlock && (
           <div>
             <Table colNames={['CSEC Type', 'Start Date', 'End Date']} />
-            <DropDownField
-              id="dropdown6"
-              gridClassName="col-md-4 col-sm-6 col-xs-12"
-              selectedOption={this.state.StateTypesValue}
-              options={stateTypes}
-              label="CSEC Data Type"
-              onChange={this.handleDropdownChange('StateTypesValue')}
-            />
-            <div className="col-md-4 col-sm-6 col-xs-12">
-              <label htmlFor="START DATE">START DATE</label>
-              <DateTimePicker />
-            </div>
-            <div className="col-md-4 col-sm-6 col-xs-12">
-              <label htmlFor="END DATE">END DATE</label>
-              <DateTimePicker fieldClassName="form-group" />
+            <div>
+              <DropDownField
+                id="dropdown6"
+                gridClassName="col-md-4 col-sm-6 col-xs-12"
+                selectedOption={this.state.StateTypesValue}
+                options={stateTypes}
+                label="CSEC Data Type"
+                onChange={this.handleDropdownChange('StateTypesValue')}
+              />
+              <div className="col-md-4 col-sm-6 col-xs-12">
+                <label htmlFor="START DATE">START DATE</label>
+                <DateTimePicker />
+              </div>
+              <div className="col-md-4 col-sm-6 col-xs-12">
+                <label htmlFor="END DATE">END DATE</label>
+                <DateTimePicker fieldClassName="form-group" />
+              </div>
             </div>
           </div>
         )}
@@ -301,3 +308,6 @@ export default class ClientInformation extends React.Component {
     );
   }
 }
+ClientInformation.propTypes = {
+  anchorId: PropTypes.string,
+};

@@ -49,12 +49,20 @@ describe('Client Information', () => {
       expect(wrapper.state.csecBlock).toEqual(true);
     });
 
-    it('dropdown is available on click', () => {
+    it('toggles the display of the csec block ', () => {
+      clientPage.setState({ csecBlock: false });
       expect(clientPage.find('DropDownField').length).toBe(5);
-      expect(clientPage.find('DateTimePicker').length).toBe(2);
       clientPage.setState({ csecBlock: true });
       expect(clientPage.find('DropDownField').length).toBe(6);
-      expect(clientPage.find('DateTimePicker').length).toBe(4);
+      expect(clientPage.find('Table').length).toBe(1);
+
+      it('dropdown is available on click', () => {
+        expect(clientPage.find('DropDownField').length).toBe(5);
+        expect(clientPage.find('DateTimePicker').length).toBe(2);
+        clientPage.setState({ csecBlock: true });
+        expect(clientPage.find('DropDownField').length).toBe(6);
+        expect(clientPage.find('DateTimePicker').length).toBe(4);
+      });
     });
   });
 });

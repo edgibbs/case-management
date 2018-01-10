@@ -1,10 +1,6 @@
 import React from 'react';
-import {
-  DropDownField,
-  Cards,
-  CheckboxRadioGroup,
-  Button,
-} from 'react-wood-duck';
+import PropTypes from 'prop-types';
+import { DropDownField, Cards, CheckboxRadioGroup } from 'react-wood-duck';
 
 const primaryLanguage = [
   { value: 'English', label: 'English' },
@@ -65,7 +61,9 @@ export default class OtherClientInformation extends React.Component {
     return (
       <Cards
         cardHeaderText="Other Client Information"
-        cardbgcolor="transparent"
+        id={this.props.anchorId}
+        cardHeaderButton={false}
+        cardActionButtons={true}
       >
         <div>
           <div>
@@ -130,14 +128,12 @@ export default class OtherClientInformation extends React.Component {
               selectedOptions={this.state.incapacitatedParentSelection}
             />
           </div>
-          <div className="pull-right col-md-2">
-            <Button btnClassName="primary" btnName="save" />
-          </div>
-          <div className="pull-right col-md-2">
-            <Button btnClassName="default" btnName="cancel" disabled={false} />
-          </div>
         </div>
       </Cards>
     );
   }
 }
+
+OtherClientInformation.propTypes = {
+  anchorId: PropTypes.string,
+};
