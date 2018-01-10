@@ -6557,9 +6557,9 @@ react-transition-group@^2.2.0:
     prop-types "^15.5.8"
     warning "^3.0.0"
 
-react-wood-duck@^0.1.44:
-  version "0.1.44"
-  resolved "https://registry.yarnpkg.com/react-wood-duck/-/react-wood-duck-0.1.44.tgz#c6f1dc7f28b708095878517858587e81d893e11e"
+react-wood-duck@^0.1.46:
+  version "0.1.46"
+  resolved "https://registry.yarnpkg.com/react-wood-duck/-/react-wood-duck-0.1.46.tgz#53adb465b995723922a496704119dfb5644d675d"
   dependencies:
     babel-runtime "^6.6.1"
     bootstrap "^3.3.7"

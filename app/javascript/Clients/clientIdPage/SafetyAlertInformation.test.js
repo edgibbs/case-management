@@ -20,18 +20,6 @@ describe('Safety Alert Information', () => {
     expect(safetyAlert.find('Table').length).toEqual(1);
   });
 
-  it('should render the dropdown fields', () => {
-    expect(safetyAlert.find('DropDownField').length).toEqual(3);
-  });
-
-  it('should render the DatePicker components', () => {
-    expect(safetyAlert.find('DateTimePicker').length).toEqual(2);
-  });
-
-  it('should render the TextArea fields', () => {
-    expect(safetyAlert.find('TextArea').length).toEqual(2);
-  });
-
   it('should an event handler that sets state', () => {
     const instance = safetyAlert.instance();
     const myFunction = instance.onChange('myKey');
@@ -47,6 +35,21 @@ describe('Safety Alert Information', () => {
       target: { value: 'Not Safe environment' },
     });
     expect(instance.state.explanation).toBe('Not Safe environment');
+  });
+
+  it('test the condition if equals the addAlert state changes', () => {
+    const wrapper = safetyAlert.instance();
+    wrapper.onClick({
+      target: { clicked: true },
+    });
+    expect(wrapper.state.addAlert).toEqual(true);
+  });
+
+  it('Verify the components after onclick', () => {
+    safetyAlert.setState({ addAlert: true });
+    expect(safetyAlert.find('DropDownField').length).toEqual(3);
+    expect(safetyAlert.find('TextArea').length).toEqual(2);
+    expect(safetyAlert.find('DateTimePicker').length).toEqual(2);
   });
 
   it('should manage the Deactive change', () => {

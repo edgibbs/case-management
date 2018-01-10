@@ -81,7 +81,7 @@ export default class SafetyAlertInformation extends React.Component {
           />
         </div>
         <Table />
-        {this.state.addAlert ? (
+        {this.state.addAlert && (
           <div>
             <label htmlFor="Safety Alert Activation">
               Safety Alert Activation
@@ -149,7 +149,7 @@ export default class SafetyAlertInformation extends React.Component {
               />
             </div>
           </div>
-        ) : null}
+        )}
       </Cards>
     );
   }
