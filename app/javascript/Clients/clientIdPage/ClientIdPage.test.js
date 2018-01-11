@@ -13,7 +13,7 @@ describe('Client ID Page', () => {
   describe('#handleSelect', () => {
     it('stops propagation', () => {
       const event = { stopPropagation: () => {} };
-      const stopPropagation = jest.spyOn(event, 'stopPropagation');
+      jest.spyOn(event, 'stopPropagation');
       const wrapper = mount(<ClientIdPage />).instance();
       wrapper.handleSelect('_href', event);
       expect(event.stopPropagation).toHaveBeenCalledWith();
