@@ -1,4 +1,5 @@
 import React from 'react';
+import ClientService from '../../_services/client';
 import PropTypes from 'prop-types';
 import {
   DropDownField,
@@ -10,25 +11,22 @@ import {
 import Table from '../../_components/Table';
 
 const gender = [
-  { value: 'Male', label: 'Male' },
-  { value: 'Female', label: 'Female' },
-  { value: 'Other', label: 'Other' },
+  { value: 'M', label: 'Male' },
+  { value: 'F', label: 'Female' },
+  { value: 'O', label: 'Other' },
 ];
 const marital = [
-  { value: 'Married', label: 'Married' },
-  { value: 'Never Married', label: 'Never Married' },
-  { value: 'Widowed', label: 'Widowed' },
-  { value: 'Divorced', label: 'Divorced' },
+  { value: '0', label: 'Married' },
+  { value: '1', label: 'Never Married' },
+  { value: '2', label: 'Widowed' },
+  { value: '3', label: 'Divorced' },
 ];
 const ageUnit = [
   { value: '1 year', label: '1 year' },
   { value: '2 years', label: '2 years' },
   { value: '3 years', label: '3 years' },
 ];
-const stateTypes = [
-  { value: 'one', label: 'One' },
-  { value: 'two', label: 'Two' },
-];
+const stateTypes = [{ value: '0', label: 'CA' }, { value: '1', label: 'NY' }];
 const nameType = [
   { value: 'Primary', label: 'Primary' },
   { value: 'Secondary', label: 'Secondary' },
@@ -38,6 +36,7 @@ export default class ClientInformation extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      response: { XHRStatus: 'idle' },
       checked: false,
       value: '',
       client: ['Client is a Minor/NMD parent'],
@@ -46,16 +45,71 @@ export default class ClientInformation extends React.Component {
       confidentiality: [' Confidentiality in effect'],
       csec: ['This case involves CSEC Data'],
       selected: [],
-      nameTypeValue: '',
+      genderValue: '',
       maritalValue: '',
       ageUnitValue: '',
       StateTypesValue: '',
-      genderValue: '',
+      nameTypeValue: '',
+      prefix: '',
+      firstName: '',
+      middleName: '',
+      lastName: '',
+      suffix: '',
+      socialSecurityNumber: '',
+      birthDate: '',
+      age: '',
+      clientNumber: '',
+      alienRegistration: '',
+      driverLicensNumber: '',
       csecBlock: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleDropdownChange = this.handleDropdownChange.bind(this);
   }
+
+  componentDidMount() {
+    this.fetchClient();
+    this.setClient();
+  }
+
+  fetchClient = () => {
+    this.setState({ response: { XHRStatus: 'waiting' } });
+    return ClientService.fetch()
+      .then(response =>
+        this.setState({
+          response: {
+            XHRStatus: 'ready',
+            record: response,
+          },
+        })
+      )
+      .catch(() => this.setState({ response: { XHRStatus: 'error' } }));
+  };
+
+  setClient = () => {
+    return ClientService.fetch().then(response =>
+      this.setState({
+        status: this.state.response.XHRStatus,
+        prefix: response.name_prefix_description,
+        firstName: response.common_first_name,
+        middleName: response.common_middle_name,
+        lastName: response.common_last_name,
+        suffix: response.suffix_title_description,
+        socialSecurityNumber: response.social_security_number,
+        birthDate: response.birth_dt,
+        age: response.adopted_age,
+        clientNumber: response.identifier,
+        alienRegistration: response.alien_registration_number,
+        driverLicensNumber: response.driver_licens_number,
+        genderValue: response.gender_code,
+        maritalValue: String(response.material_status_type),
+        ageUnitValue: response.ageUnit,
+        stateTypesValue: String(response.driver_license_state_code_type),
+        nameType: response.name_type,
+      })
+    );
+  };
+
   handleChange(event) {
     const newSelection = event.target.value;
     let newSelectionArray;
@@ -92,35 +146,35 @@ export default class ClientInformation extends React.Component {
             fieldClassName="form-group"
             label="Prefix"
             type="string"
-            placeholder="Mr. Mrs. "
+            value={this.state.prefix}
           />
           <InputComponent
             gridClassName="col-md-3 col-sm-6 col-xs-12"
             fieldClassName="form-group"
             label="First Name (required)"
             type="string"
-            placeholder="Eg: Peter"
+            value={this.state.firstName}
           />
           <InputComponent
             gridClassName="col-md-3 col-sm-6 col-xs-12"
             fieldClassName="form-group"
             label="Middle Name"
             type="string"
-            placeholder="Eg: John"
+            value={this.state.middleName}
           />
           <InputComponent
             gridClassName="col-md-3 col-sm-6 col-xs-12"
             fieldClassName="form-group"
             label="Last Name (required)"
             type="string"
-            placeholder="Eg: Lauren"
+            value={this.state.lastName}
           />
           <InputComponent
             gridClassName="col-md-2 col-sm-6 col-xs-12"
             fieldClassName="form-group"
             label="Suffix"
             type="string"
-            placeholder="Junior/Senior"
+            value={this.state.suffix}
           />
         </div>
         <div>
@@ -145,14 +199,14 @@ export default class ClientInformation extends React.Component {
             fieldClassName="form-group"
             label="SSN"
             type="number"
-            placeholder="Eg: 121-234-3443"
+            value={this.state.socialSecurityNumber}
           />
           <InputComponent
-            label="Client Index Numnber"
+            label="Client Index Number"
             gridClassName="col-md-3 col-sm-3 col-xs-3"
             fieldClassName="form-group"
             type="number"
-            placeholder="Eg: 1234"
+            value={this.state.clientIndexNumber}
           />
         </div>
         <div className="row">
@@ -167,15 +221,19 @@ export default class ClientInformation extends React.Component {
               onChange={this.handleDropdownChange('genderValue')}
             />
           </div>
-          <div className="col-md-3 col-sm-6 col-xs-12">
-            <label htmlFor="Date Of Birth">DATE OF BIRTH</label>
-            <DateTimePicker />
-          </div>
+          <InputComponent
+            label="Date Of Birth"
+            gridClassName="col-md-3 col-sm-6 col-xs-12"
+            fieldClassName="form-group"
+            type="text"
+            value={this.state.birthDate}
+          />
           <InputComponent
             gridClassName="col-md-3 col-sm-6 col-xs-12"
             fieldClassName="form-group"
             label="Age"
             type="number"
+            placeholder={this.state.age}
           />
           <DropDownField
             id="dropdown4"
@@ -193,6 +251,7 @@ export default class ClientInformation extends React.Component {
               fieldClassName="form-group"
               label="Client Number"
               type="number"
+              placeholder={this.state.clientNumber}
             />
           </div>
           <InputComponent
@@ -200,20 +259,22 @@ export default class ClientInformation extends React.Component {
             fieldClassName="form-group"
             label="Alien Registration#"
             type="number"
+            value={this.state.alienRegistration}
           />
           <DropDownField
             id="dropdown5"
             gridClassName="col-md-3 col-sm-6 col-xs-12"
-            selectedOption={this.state.StateTypesValue}
+            selectedOption={this.state.stateTypesValue}
             options={stateTypes}
             label="Drivers License State"
-            onChange={this.handleDropdownChange('StateTypesValue')}
+            onChange={this.handleDropdownChange('this.state.stateTypesValue')}
           />
           <InputComponent
             gridClassName="col-md-3 col-sm-6 col-xs-12"
             fieldClassName="form-group"
             label="Drivers License # "
             type="number"
+            value={this.state.driverLicensNumber}
           />
         </div>
         <div className="form-group row">

@@ -15,7 +15,7 @@ services:
     ports:
       - "6379:6379"
   case-api:
-    image: ${REPOSITORY}/case-management-api
+    image: ${REPOSITORY}/case-management-api:no-auth-tmp
     hostname: casemanagement
     depends_on:
       - db2

@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-class ClientsController < ApplicationController
+class ClientidController < ApplicationController
   def index; end
 end

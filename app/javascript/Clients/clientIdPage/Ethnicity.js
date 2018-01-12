@@ -68,7 +68,7 @@ export default class Ethnicity extends React.Component {
               <DropDownField
                 id="dropdown1"
                 gridClassName="col-md-6 col-sm-6 col-xs-12"
-                selectedOption={this.state.primaryLanguage}
+                selectedOption={this.state.county}
                 options={county}
                 label="Primary Language"
                 onChange={this.handleDropdownChange('county')}
