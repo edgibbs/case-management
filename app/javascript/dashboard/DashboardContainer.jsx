@@ -87,7 +87,7 @@ class DashboardContainer extends React.Component {
     return (
       <div>
         <GlobalHeader />
-        <PageHeader pageTitle="Dashboard" button={null} />
+        <PageHeader pageTitle="Caseworker Dashboard" button={null} />
         <div className="container">
           <div className="row">
             <div className="col-md-9">
