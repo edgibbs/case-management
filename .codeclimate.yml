@@ -68,6 +68,9 @@ plugins:
     channel: rubocop-0-48
   git-legal:
     enabled: true
+    config:
+      allow_affero_copyleft: true
+      allow_strong_copyleft: true
     issue_override:
       severity: major
 exclude_patterns:
@@ -82,4 +85,4 @@ exclude_patterns:
   - "**/tests/"
   - "**/vendor/"
   - "**/*.d.ts"
-  - app/assets
+  - "app/assets"
