@@ -19,7 +19,7 @@ checks:
     config:
       languages:
         javascript:
-          threshold: 50
+          threshold: 250
   nested-control-flow:
     enabled: true
   return-statements:
