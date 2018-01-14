@@ -9,17 +9,17 @@ checks:
     config:
       languages:
         javascript:
-          threshold: 351
+          threshold: 350
   method-complexity:
     enabled: false
   method-count:
     enabled: false
   method-lines:
-    enabled: false
+    enabled: true
     config:
       languages:
         javascript:
-          threshold: 251
+          threshold: 200
   nested-control-flow:
     enabled: false
   return-statements:
