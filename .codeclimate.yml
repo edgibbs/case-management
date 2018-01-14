@@ -1,44 +1,44 @@
 version: "2"
 checks:
   argument-count:
-    enabled: true
+    enabled: false
   complex-logic:
-    enabled: true
+    enabled: false
   file-lines:
-    enabled: true
+    enabled: false
     config:
       languages:
         javascript:
           threshold: 350
   method-complexity:
-    enabled: true
+    enabled: false
   method-count:
-    enabled: true
+    enabled: false
   method-lines:
-    enabled: true
+    enabled: false
     config:
       languages:
         javascript:
           threshold: 250
   nested-control-flow:
-    enabled: true
+    enabled: false
   return-statements:
-    enabled: true
+    enabled: false
   similar-code:
-    enabled: true
+    enabled: false
     config:
       languages:
         - javascript:
           enabled: false
   identical-code:
-    enabled: true
+    enabled: false
 plugins:
   brakeman:
     enabled: true
   bundler-audit:
     enabled: true
   stylelint:
-    enabled: true  
+    enabled: true
     exclude_patterns:
     - "public/"
     - "yarn.lock"
