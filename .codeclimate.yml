@@ -5,7 +5,7 @@ checks:
   complex-logic:
     enabled: false
   file-lines:
-    enabled: false
+    enabled: true
     config:
       languages:
         javascript:
