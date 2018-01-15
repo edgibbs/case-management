@@ -15,7 +15,7 @@ checks:
   method-count:
     enabled: true
   method-lines:
-    enabled: false
+    enabled: true
     config:
       languages:
         javascript:
