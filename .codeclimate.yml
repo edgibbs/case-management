@@ -18,20 +18,12 @@ checks:
     enabled: true
     config:
       threshold: 200
-    # config:
-    #   languages:
-    #     javascript:
-    #       threshold: 200
   nested-control-flow:
-    enabled: false
+    enabled: true
   return-statements:
-    enabled: false
+    enabled: true
   similar-code:
     enabled: false
-    config:
-      languages:
-        - javascript:
-          enabled: false
   identical-code:
     enabled: true
 plugins:
