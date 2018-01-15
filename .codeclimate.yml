@@ -13,7 +13,7 @@ checks:
   method-complexity:
     enabled: false
   method-count:
-    enabled: false
+    enabled: true
   method-lines:
     enabled: false
     config:
@@ -31,7 +31,7 @@ checks:
         - javascript:
           enabled: false
   identical-code:
-    enabled: false
+    enabled: true
 plugins:
   brakeman:
     enabled: true
