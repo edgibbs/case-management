@@ -16,10 +16,11 @@ checks:
     enabled: true
   method-lines:
     enabled: true
-    config:
-      languages:
-        javascript:
-          threshold: 200
+    threshold: 200
+    # config:
+    #   languages:
+    #     javascript:
+    #       threshold: 200
   nested-control-flow:
     enabled: false
   return-statements:
