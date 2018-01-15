@@ -11,7 +11,7 @@ checks:
         javascript:
           threshold: 350
   method-complexity:
-    enabled: false
+    enabled: true
   method-count:
     enabled: true
   method-lines:
