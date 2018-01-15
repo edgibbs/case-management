@@ -3,7 +3,7 @@ checks:
   argument-count:
     enabled: true
   complex-logic:
-    enabled: false
+    enabled: true
   file-lines:
     enabled: false
     config:
