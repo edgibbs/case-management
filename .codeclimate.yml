@@ -16,7 +16,8 @@ checks:
     enabled: true
   method-lines:
     enabled: true
-    threshold: 200
+    config:
+      threshold: 200
     # config:
     #   languages:
     #     javascript:
