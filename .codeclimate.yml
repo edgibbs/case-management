@@ -1,11 +1,11 @@
 version: "2"
 checks:
   argument-count:
-    enabled: false
+    enabled: true
   complex-logic:
     enabled: false
   file-lines:
-    enabled: true
+    enabled: false
     config:
       languages:
         javascript:
@@ -15,7 +15,7 @@ checks:
   method-count:
     enabled: false
   method-lines:
-    enabled: true
+    enabled: false
     config:
       languages:
         javascript:
