@@ -20,7 +20,9 @@
     "start": "scripts/start.sh",
     "build": "npm-run-all --serial clean lint test build:webpacker",
     "dc:up": "docker-compose up",
-    "dc:rebuild": "docker-compose stop case-web && docker-compose build case-web && docker-compose up -d case-web"
+    "dc:rebuild": "docker-compose stop case-web && docker-compose build case-web && docker-compose up -d case-web",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "dependencies": {
     "@rails/webpacker": "^3.1.1",
@@ -33,7 +35,8 @@
     "react-wood-duck": "^0.1.46",
     "sass-loader": "^6.0.6",
     "stylelint": "^8.4.0",
-    "stylelint-config-standard": "^18.0.0"
+    "stylelint-config-standard": "^18.0.0",
+    "snyk": "^1.85.0"
   },
   "devDependencies": {
     "@types/enzyme": "^3.1.5",
@@ -73,5 +76,6 @@
     "typescript": "^2.6.2",
     "webpack": "^3.0.0",
     "webpack-dev-server": "^2.9.7"
-  }
+  },
+  "snyk": true
 }
